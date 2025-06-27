@@ -3994,7 +3994,7 @@
 
       #GROUP180 {
         top: 109.154px;
-        left: 753px;
+        left: 853px;
       }
 
       #PARAGRAPH69 {
@@ -4118,9 +4118,9 @@
         display: none !important;
       }
 
-      #SECTION12>.ladi-section-background {
-        background-image: url("./ladi/kv-vay-nhanh-lai-canh-tranh-1000x310-1-20240216094840-v5ol5.png");
-      }
+      /*#SECTION12>.ladi-section-background {*/
+      /*  background-image: url("./ladi/kv-vay-nhanh-lai-canh-tranh-1000x310-1-20240216094840-v5ol5.png");*/
+      /*}*/
 
       #SECTION13,
       #SECTION15 {
@@ -7079,7 +7079,20 @@
       </div>
     </div>
     <div id="SECTION2" class='ladi-section'>
-      <div class='ladi-section-background'></div>
+      <div class='ladi-section-background'>
+        <div class="slider-wrapper">
+          <div class="slider">
+            <!--              <div class="slide slide-gif" style="background-image: url('./ladi/vay4buoc.gif');"></div>-->
+            <!--              <div class="slide" style="background-image: url('./ladi/kv-vay-nhanh-lai-canh-tranh-1000x310-1-20240318111907-iu7ag.png');"></div>-->
+            <div class="slide slide-video">
+              <video autoplay loop muted playsinline>
+                <source src="./ladi/vay4buoc2.mp4" type="video/mp4">
+              </video>
+            </div>
+            <!--              <div class="slide slide-gif" style="background-image: url('./ladi/vay4buoc.gif');"></div>-->
+          </div>
+        </div>
+      </div>
       <div class="ladi-container">
         <div data-action="true" id="GROUP180" class='ladi-element'>
           <div class='ladi-group'>
@@ -7354,11 +7367,27 @@
             <div class="ladi-image-background"></div>
           </div>
         </div>
+        <div class="slider-arrow left"></div>
+        <div class="slider-arrow right"></div>
       </div>
     </div>
     <div id="SECTION12" class='ladi-section'>
-      <div class='ladi-section-background'></div>
-      <div class="ladi-container"></div>
+      <div class='ladi-section-background'>
+        <div class="slider-wrapper">
+          <div class="slider">
+            <!--              <div class="slide slide-gif" style="background-image: url('./ladi/vay4buoc.gif');"></div>-->
+            <!--              <div class="slide" style="background-image: url('./ladi/kv-vay-nhanh-lai-canh-tranh-1000x310-1-20240318111907-iu7ag.png');"></div>-->
+            <div class="slide slide-gif"></div>
+            <div class="slide slide-static"></div>
+            <div class="slide slide-gif"></div>
+            <!--              <div class="slide slide-gif" style="background-image: url('./ladi/vay4buoc.gif');"></div>-->
+          </div>
+        </div>
+      </div>
+      <div class="ladi-container">
+        <div class="slider-arrow left"></div>
+        <div class="slider-arrow right"></div>
+      </div>
     </div>
     <div id="SECTION13" class='ladi-section'>
       <div class='ladi-section-background'></div>
@@ -7650,6 +7679,145 @@
         </div>
       </div>
     </div>
+    <div id="SECTION5" class='ladi-section'>
+      <div class='ladi-section-background'></div>
+      <div class="ladi-container">
+        <div id="IMAGE91" class='ladi-element'>
+          <div class='ladi-image'>
+            <div class="ladi-image-background"></div>
+          </div>
+        </div>
+        <div id="IMAGE71" class='ladi-element'>
+          <div class='ladi-image'>
+            <div class="ladi-image-background"></div>
+          </div>
+        </div>
+        <div id="BOX28" class='ladi-element'>
+          <div class='ladi-box ladi-transition'></div>
+        </div>
+        <div id="PARAGRAPH59" class='ladi-element'>
+          <div class='ladi-paragraph'>Ước tính khoản vay</div>
+        </div>
+        <div id="GROUP112" class='ladi-element'>
+          <div class='ladi-group'>
+            <div id="BOX29" class='ladi-element'>
+              <div class='ladi-box ladi-transition'></div>
+            </div>
+            <div id="PARAGRAPH66" class='ladi-element'>
+              <div class='ladi-paragraph'>Số tiền phải trả hàng tháng</div>
+            </div>
+            <div id="PARAGRAPH67" class='ladi-element'>
+              <div class='ladi-paragraph'><span style="color: rgb(231, 37, 43); font-weight: bold;">*Lưu ý:</span> Kết
+                quả tính toán này chỉ mang tính chất tham khảo và có thể sai lệch nhỏ với kết quả tính toán thực tế
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="HTML_CODE1" class='ladi-element'>
+          <div class='ladi-html-code'>
+            <div class="flex flex-col px-7 gap-6">
+              <form action="#" class="flex flex-col gap-6 form-register">
+                <div class="flex flex-col justify-start w-full gap-4">
+                  <div class="flex justify-between items-center">
+                    <label for="amount-rate" class="block mb-2 text-sm font-medium">
+                      <h5>Số tiền vay (VND)</h5>
+                    </label>
+                    <div class="border border-red p-2 pl-4 rounded-lg" style="border: 1px solid #e7252b !important;">
+                      <p>
+                        <span id="amount-rate-result" class="text-sm font-medium"></span>
+                        <span class="text-gray-400">VND</span>
+                      </p>
+                    </div>
+                  </div>
+                  <input id="amount-rate" type="range" min="10000000" max="500000000" step="5000000"
+                         class="w-full h-1 bg-[#FFDAD6] accent-white rounded-lg appearance-none cursor-pointer range-sm">
+                  <div class="flex justify-between">
+                    <p class="text-gray-400">Tối thiểu 10.000.000 VND</p>
+                    <p class="text-gray-400">Tối đa 500.000.000 VND</p>
+                  </div>
+                </div>
+                <div class="flex flex-col justify-start w-full gap-4">
+                  <div class="flex justify-between items-center">
+                    <label for="month" class="block mb-2 text-sm font-medium">
+                      <h5>Thời gian vay (tháng)</h5>
+                    </label>
+                    <div class="border border-red p-2 pl-4 rounded-lg" style="border: 1px solid #e7252b !important;">
+                      <p>
+                        <span id="month-result" class="text-sm font-medium"></span>
+                        <span class="text-gray-400">tháng</span>
+                      </p>
+                    </div>
+                  </div>
+                  <input id="month" type="range" min="6" max="60"
+                         class="w-full h-1 bg-[#FFDAD6] accent-white rounded-lg appearance-none cursor-pointer range-sm">
+                  <div class="flex justify-between">
+                    <p class="text-gray-400">Tối thiểu 6 tháng</p>
+                    <p class="text-gray-400">Tối đa 60 tháng</p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div id="HTML_CODE2" class='ladi-element'>
+          <div class='ladi-html-code'>
+            <div
+                    class="flex bg-[#FFDBDB] w-full justify-center rounded-lg border h-16 border-[#E7252B] border-dashed gap-2 items-center"
+                    style="border-style: dashed !important; border-color: rgb(231 37 43 / var(--tw-border-opacity)) !important;">
+              <h2 class="font-semibold" id="invoice-amount"></h2>
+              <h3>VND</h3>
+            </div>
+          </div>
+        </div>
+        <div id="IMAGE70" class='ladi-element'>
+          <div class='ladi-image'>
+            <div class="ladi-image-background"></div>
+          </div>
+        </div>
+        <div data-action="true" id="GROUP115" class='ladi-element'>
+          <div class='ladi-group'>
+            <div id="BUTTON28" class='ladi-element'>
+              <div class='ladi-button ladi-transition'>
+                <div class="ladi-button-background"></div>
+                <div id="BUTTON_TEXT28" class='ladi-element ladi-button-headline'>
+                  <p class='ladi-headline ladi-transition'>Đăng ký ngay&nbsp; &nbsp;</p>
+                </div>
+              </div>
+            </div>
+            <div id="SHAPE18" class='ladi-element'>
+              <div class='ladi-shape'><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+                                           preserveAspectRatio="none" viewBox="0 0 24 24" class="" fill="#FFFFFF">
+                <use xlink:href="#shape_JPJeNRfroa"></use>
+              </svg></div>
+            </div>
+          </div>
+        </div>
+        <div id="PARA-EXAMPLE" class='ladi-element'>
+          <p>Lãi suất minh họa : 18%/năm (tính trên dư nợ giảm dần)</p>
+          <p>
+            - Giá trị khoản vay: từ 10 triệu – 500 triệu đồng <br>
+            - Thời gian vay: từ 06 tháng - 60 tháng <br>
+            - Lãi suất và chi phí vay, trong đó : <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;+ Lãi suất tối đa 25,1 %/năm (tính trên dư nợ ban đầu) <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;+ Chi phí vay: Không có bất kỳ chi phí nào ngoại trừ phí thanh toán trước hạn hoặc
+            phí trả chậm (nếu có)
+          </p>
+          <p style="font-style: italic;margin-top: 10px;"><strong>Ví dụ:</strong> Với khoản vay tiêu dùng 10 triệu đồng,
+            thời hạn vay 12 tháng, lãi suất 18%/ năm tính trên dư nợ giảm dần (tương đương 10 %/năm lãi suất tính trên
+            dư nợ ban đầu). Với các phương thức thanh toán nợ gốc, lãi hàng tháng, số tiền hàng tháng phải trả là
+            917.000 VND. Trong đó:
+          </p>
+
+          <p style="font-style: italic;">
+            - Lãi suất mỗi tháng là: 83.333 VND <br>
+            - Số tiền nợ gốc mỗi tháng là: 833.667 VND <br>
+            - Chi phí vay: 0 VND
+          </p>
+          <p style="font-style: italic;">Như vậy, tổng số tiền phải thanh toán bao gồm tiền nợ gốc và lãi là 11.000.000
+            VND</p>
+        </div>
+      </div>
+    </div>
     <div id="SECTION3" class='ladi-section'>
       <div class='ladi-section-background'></div>
       <div class="ladi-container">
@@ -7823,440 +7991,211 @@
             </div>
           </div>
         </div>
-        <div id="GROUP91" class='ladi-element'>
-          <div class='ladi-group'>
-            <div id="IMAGE9" class='ladi-element'>
-              <div class='ladi-image'>
-                <div class="ladi-image-background"></div>
+
+        <div id="GROUP91" class='ladi-element swirl-card-container'>
+          <div class="swirl-flipper">
+            <div class="swirl-front">
+              <div class='ladi-group'>
+                <div id="IMAGE9" class='ladi-element'><div class='ladi-image'><div class="ladi-image-background"></div></div></div>
+                <div data-action="true" id="GROUP90" class='ladi-element'><div class='ladi-group'><div id="BUTTON11" class='ladi-element'><div class='ladi-button ladi-transition'><div class="ladi-button-background"></div><div id="BUTTON_TEXT11" class='ladi-element ladi-button-headline'><p class='ladi-headline ladi-transition'>Đăng ký ngay   </p></div></div></div><div id="SHAPE11" class='ladi-element'><div class='ladi-shape'><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 24 24" fill="#FFFFFF"><use xlink:href="#shape_JPJeNRfroa"></use></svg></div></div></div></div>
+                <div id="HEADLINE32" class='ladi-element'><h3 class='ladi-headline ladi-transition'>Cho vay khách hàng<br>có nguồn thu nhập từ lương<br></h3></div>
+                <div id="HEADLINE33" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: normal;">Khách hàng là công nhân, đang làm việc chính thức tại các công ty với thu nhập chỉ từ 4 triệu đồng đã có thể vay với lãi suất hấp dẫn</span><br></h3></div>
+                <div id="GROUP70" class='ladi-element'><div class='ladi-group'><div id="HEADLINE34" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Số tiền vay (tối đa)</span><br></h3></div><div id="HEADLINE35" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Lãi suất (tạm tính) *</span><br></h3></div><div id="LINE18" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div><div id="LINE19" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div><div id="HEADLINE36" class='ladi-element'><h3 class='ladi-headline ladi-transition'>300 triệu</h3></div><div id="HEADLINE37" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-size: 22px; color: rgb(231, 37, 43);">0.83%</span> /tháng</h3></div><div id="LINE20" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div></div></div>
               </div>
             </div>
-            <div data-action="true" id="GROUP90" class='ladi-element'>
-              <div class='ladi-group'>
-                <div id="BUTTON11" class='ladi-element'>
-                  <div class='ladi-button ladi-transition'>
-                    <div class="ladi-button-background"></div>
-                    <div id="BUTTON_TEXT11" class='ladi-element ladi-button-headline'>
-                      <p class='ladi-headline ladi-transition'>Đăng ký ngay&nbsp; &nbsp;</p>
+            <div class="swirl-back">
+              <div class="back-content-wrapper">
+                <div class="back-content">
+                  <img src="./ladi/icon-cash-in-hand.png" alt="icon" class="back-icon">
+                  <h3 class="back-title">Cho vay khách hàng<br>có nguồn thu nhập từ lương</h3>
+                  <div class="back-divider"></div>
+                  <ul class="back-list">
+                    <li>Độ tuổi: 20-60 tuổi (tại thời điểm kết thúc khoản vay không quá 60 tuổi)</li>
+                    <li>KH có HĐLĐ chính thức, thời gian làm việc chính thức ≥ 3 tháng</li>
+                    <li>Thu nhập bình quân ≥ 4 triệu đồng</li>
+                    <li>Nhận lương qua tài khoản Ngân hàng</li>
+                    <li>Không có khoản vay mới trong 1 tháng gần nhất</li>
+                  </ul>
+                  <div class="back-divider"></div>
+                  <div class="back-button-wrapper" data-action="true" onclick="document.getElementById('BUTTON11').click()">
+                    <div class='ladi-button'>
+                      <div class='ladi-element ladi-button-headline'>
+                        <p class='ladi-headline'>Đăng ký ngay →</p>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div id="SHAPE11" class='ladi-element'>
-                  <div class='ladi-shape'><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
-                      preserveAspectRatio="none" viewBox="0 0 24 24" class="" fill="#FFFFFF">
-                      <use xlink:href="#shape_JPJeNRfroa"></use>
-                    </svg></div>
-                </div>
-              </div>
-            </div>
-            <div id="HEADLINE32" class='ladi-element'>
-              <h3 class='ladi-headline ladi-transition'>Cho vay khách hàng<br>có nguồn thu nhập từ lương<br></h3>
-            </div>
-            <div id="HEADLINE33" class='ladi-element'>
-              <h3 class='ladi-headline ladi-transition'><span style="font-weight: normal;">Khách hàng là công nhân, đang
-                  làm việc chính thức tại các công ty với thu nhập chỉ từ 4 triệu đồng đã có thể vay với lãi suất hấp
-                  dẫn</span><br></h3>
-            </div>
-            <div id="GROUP70" class='ladi-element'>
-              <div class='ladi-group'>
-                <div id="HEADLINE34" class='ladi-element'>
-                  <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Số tiền vay (tối
-                      đa)</span><br></h3>
-                </div>
-                <div id="HEADLINE35" class='ladi-element'>
-                  <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Lãi suất (tạm
-                      tính) *</span><br></h3>
-                </div>
-                <div id="LINE18" class='ladi-element'>
-                  <div class='ladi-line'>
-                    <div class="ladi-line-container"></div>
-                  </div>
-                </div>
-                <div id="LINE19" class='ladi-element'>
-                  <div class='ladi-line'>
-                    <div class="ladi-line-container"></div>
-                  </div>
-                </div>
-                <div id="HEADLINE36" class='ladi-element'>
-                  <h3 class='ladi-headline ladi-transition'>300 triệu</h3>
-                </div>
-                <div id="HEADLINE37" class='ladi-element'>
-                  <h3 class='ladi-headline ladi-transition'><span
-                      style="font-size: 22px; color: rgb(231, 37, 43);">0.83%</span> /tháng</h3>
-                </div>
-                <div id="LINE20" class='ladi-element'>
-                  <div class='ladi-line'>
-                    <div class="ladi-line-container"></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div id="GROUP97" class='ladi-element'>
-          <div class='ladi-group'>
-            <div id="GROUP71" class='ladi-element'>
+
+        <div id="GROUP97" class='ladi-element swirl-card-container'>
+          <div class="swirl-flipper">
+            <div class="swirl-front">
               <div class='ladi-group'>
-                <div id="IMAGE65" class='ladi-element'>
-                  <div class='ladi-image'>
-                    <div class="ladi-image-background"></div>
-                  </div>
-                </div>
-                <div id="HEADLINE50" class='ladi-element'>
-                  <h3 class='ladi-headline ladi-transition'>Cho vay khách hàng là cán bộ công chức, viên chức<br></h3>
-                </div>
-                <div id="HEADLINE51" class='ladi-element'>
-                  <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Dành cho Khách hàng là cán
-                      bộ, công chức, viên chức.... Nhà nước với thu nhập chỉ từ 3 triệu đồng&nbsp;&nbsp;</span><br></h3>
-                </div>
-                <div id="GROUP72" class='ladi-element'>
-                  <div class='ladi-group'>
-                    <div id="HEADLINE52" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Số tiền vay (tối
-                          đa)</span><br></h3>
-                    </div>
-                    <div id="HEADLINE53" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Lãi suất (tạm
-                          tính) *</span><br></h3>
-                    </div>
-                    <div id="LINE27" class='ladi-element'>
-                      <div class='ladi-line'>
-                        <div class="ladi-line-container"></div>
-                      </div>
-                    </div>
-                    <div id="LINE28" class='ladi-element'>
-                      <div class='ladi-line'>
-                        <div class="ladi-line-container"></div>
-                      </div>
-                    </div>
-                    <div id="HEADLINE54" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'>500 triệu</h3>
-                    </div>
-                    <div id="HEADLINE55" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'><span
-                          style="font-size: 22px; color: rgb(231, 37, 43);">1.03%</span> /tháng</h3>
-                    </div>
-                    <div id="LINE29" class='ladi-element'>
-                      <div class='ladi-line'>
-                        <div class="ladi-line-container"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <div id="GROUP71" class='ladi-element'><div class='ladi-group'><div id="IMAGE65" class='ladi-element'><div class='ladi-image'><div class="ladi-image-background"></div></div></div><div id="HEADLINE50" class='ladi-element'><h3 class='ladi-headline ladi-transition'>Cho vay khách hàng là cán bộ công chức, viên chức<br></h3></div><div id="HEADLINE51" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Dành cho Khách hàng là cán bộ, công chức, viên chức.... Nhà nước với thu nhập chỉ từ 3 triệu đồng  </span><br></h3></div><div id="GROUP72" class='ladi-element'><div class='ladi-group'><div id="HEADLINE52" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Số tiền vay (tối đa)</span><br></h3></div><div id="HEADLINE53" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Lãi suất (tạm tính) *</span><br></h3></div><div id="LINE27" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div><div id="LINE28" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div><div id="HEADLINE54" class='ladi-element'><h3 class='ladi-headline ladi-transition'>500 triệu</h3></div><div id="HEADLINE55" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-size: 22px; color: rgb(231, 37, 43);">1.03%</span> /tháng</h3></div><div id="LINE29" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div></div></div></div></div>
+                <div data-action="true" id="GROUP92" class='ladi-element'><div class='ladi-group'><div id="BUTTON20" class='ladi-element'><div class='ladi-button ladi-transition'><div class="ladi-button-background"></div><div id="BUTTON_TEXT20" class='ladi-element ladi-button-headline'><p class='ladi-headline ladi-transition'>Đăng ký ngay   </p></div></div></div><div id="SHAPE12" class='ladi-element'><div class='ladi-shape'><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 24 24" fill="#FFFFFF"><use xlink:href="#shape_JPJeNRfroa"></use></svg></div></div></div></div>
               </div>
             </div>
-            <div data-action="true" id="GROUP92" class='ladi-element'>
-              <div class='ladi-group'>
-                <div id="BUTTON20" class='ladi-element'>
-                  <div class='ladi-button ladi-transition'>
-                    <div class="ladi-button-background"></div>
-                    <div id="BUTTON_TEXT20" class='ladi-element ladi-button-headline'>
-                      <p class='ladi-headline ladi-transition'>Đăng ký ngay&nbsp; &nbsp;</p>
-                    </div>
-                  </div>
-                </div>
-                <div id="SHAPE12" class='ladi-element'>
-                  <div class='ladi-shape'><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
-                      preserveAspectRatio="none" viewBox="0 0 24 24" class="" fill="#FFFFFF">
-                      <use xlink:href="#shape_JPJeNRfroa"></use>
-                    </svg></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="GROUP98" class='ladi-element'>
-          <div class='ladi-group'>
-            <div id="GROUP73" class='ladi-element'>
-              <div class='ladi-group'>
-                <div id="IMAGE66" class='ladi-element'>
-                  <div class='ladi-image'>
-                    <div class="ladi-image-background"></div>
-                  </div>
-                </div>
-                <div id="HEADLINE56" class='ladi-element'>
-                  <h3 class='ladi-headline ladi-transition'>Cho vay khách hàng là phụ nữ&nbsp;<br></h3>
-                </div>
-                <div id="HEADLINE57" class='ladi-element'>
-                  <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Chỉ cần có thu nhập từ 3
-                      triệu đồng, khách hàng/ chồng khách hàng sở hữu đăng ký xe máy có thể vay với lãi suất ưu
-                      đãi</span><br></h3>
-                </div>
-                <div id="GROUP74" class='ladi-element'>
-                  <div class='ladi-group'>
-                    <div id="HEADLINE58" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Số tiền vay (tối
-                          đa)</span><br></h3>
-                    </div>
-                    <div id="HEADLINE59" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Lãi suất (tạm
-                          tính) *</span><br></h3>
-                    </div>
-                    <div id="LINE30" class='ladi-element'>
-                      <div class='ladi-line'>
-                        <div class="ladi-line-container"></div>
-                      </div>
-                    </div>
-                    <div id="LINE31" class='ladi-element'>
-                      <div class='ladi-line'>
-                        <div class="ladi-line-container"></div>
-                      </div>
-                    </div>
-                    <div id="HEADLINE60" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'>50 triệu</h3>
-                    </div>
-                    <div id="HEADLINE61" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'><span
-                          style="font-size: 22px; color: rgb(231, 37, 43);">2.09%</span> /tháng</h3>
-                    </div>
-                    <div id="LINE32" class='ladi-element'>
-                      <div class='ladi-line'>
-                        <div class="ladi-line-container"></div>
+            <div class="swirl-back">
+              <div class="back-content-wrapper">
+                <div class="back-content">
+                  <img src="./ladi/icon-cash-in-hand.png" alt="icon" class="back-icon">
+                  <h3 class="back-title">Cho vay khách hàng<br>là nhân viên nhà nước</h3>
+                  <div class="back-divider"></div>
+                  <ul class="back-list">
+                    <li>Độ tuổi: 20-60</li>
+                    <li>KH có HĐLĐ chính thức, thời gian làm việc chính thức ≥ 3 tháng</li>
+                    <li>KH nhận lương qua tài khoản ngân hàng</li>
+                    <li>Thời gian đã công tác tại các cơ quan Đảng, Nhà nước, tổ chức chính trị xã hội và các đơn vị sự nghiệp công lập tối thiểu 03 tháng (không tính thời gian thử việc, thử thách, học việc)</li>
+                  </ul>
+                  <div class="back-divider"></div>
+                  <div class="back-button-wrapper" data-action="true" onclick="document.getElementById('BUTTON11').click()">
+                    <div class='ladi-button'>
+                      <div class='ladi-element ladi-button-headline'>
+                        <p class='ladi-headline'>Đăng ký ngay →</p>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div data-action="true" id="GROUP93" class='ladi-element'>
-              <div class='ladi-group'>
-                <div id="BUTTON21" class='ladi-element'>
-                  <div class='ladi-button ladi-transition'>
-                    <div class="ladi-button-background"></div>
-                    <div id="BUTTON_TEXT21" class='ladi-element ladi-button-headline'>
-                      <p class='ladi-headline ladi-transition'>Đăng ký ngay&nbsp; &nbsp;</p>
-                    </div>
-                  </div>
-                </div>
-                <div id="SHAPE13" class='ladi-element'>
-                  <div class='ladi-shape'><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
-                      preserveAspectRatio="none" viewBox="0 0 24 24" class="" fill="#FFFFFF">
-                      <use xlink:href="#shape_JPJeNRfroa"></use>
-                    </svg></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="GROUP101" class='ladi-element'>
-          <div class='ladi-group'>
-            <div id="GROUP77" class='ladi-element'>
-              <div class='ladi-group'>
-                <div id="IMAGE67" class='ladi-element'>
-                  <div class='ladi-image'>
-                    <div class="ladi-image-background"></div>
-                  </div>
-                </div>
-                <div id="HEADLINE62" class='ladi-element'>
-                  <h3 class='ladi-headline ladi-transition'>Cho vay khách hàng<br>có hợp đồng bảo hiểm nhân thọ<br></h3>
-                </div>
-                <div id="HEADLINE63" class='ladi-element'>
-                  <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Dành cho Khách hàng hoặc
-                      vợ/chồng KH có hợp đồng bảo hiểm nhân thọ, đóng phí từ 5 triệu đồng/năm với thủ tục đơn giản,
-                      nhanh chóng</span><br></h3>
-                </div>
-                <div id="GROUP78" class='ladi-element'>
-                  <div class='ladi-group'>
-                    <div id="HEADLINE64" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Số tiền vay (tối
-                          đa)</span><br></h3>
-                    </div>
-                    <div id="HEADLINE65" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Lãi suất (tạm
-                          tính) *</span><br></h3>
-                    </div>
-                    <div id="LINE33" class='ladi-element'>
-                      <div class='ladi-line'>
-                        <div class="ladi-line-container"></div>
-                      </div>
-                    </div>
-                    <div id="LINE34" class='ladi-element'>
-                      <div class='ladi-line'>
-                        <div class="ladi-line-container"></div>
-                      </div>
-                    </div>
-                    <div id="HEADLINE66" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'>100 triệu</h3>
-                    </div>
-                    <div id="HEADLINE67" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'><span
-                          style="font-size: 22px; color: rgb(231, 37, 43);">1.92%</span> /tháng</h3>
-                    </div>
-                    <div id="LINE35" class='ladi-element'>
-                      <div class='ladi-line'>
-                        <div class="ladi-line-container"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div data-action="true" id="GROUP94" class='ladi-element'>
-              <div class='ladi-group'>
-                <div data-action="true" id="BUTTON22" class='ladi-element'>
-                  <div class='ladi-button ladi-transition'>
-                    <div class="ladi-button-background"></div>
-                    <div id="BUTTON_TEXT22" class='ladi-element ladi-button-headline'>
-                      <p class='ladi-headline ladi-transition'>Đăng ký ngay&nbsp; &nbsp;</p>
-                    </div>
-                  </div>
-                </div>
-                <div id="SHAPE14" class='ladi-element'>
-                  <div class='ladi-shape'><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
-                      preserveAspectRatio="none" viewBox="0 0 24 24" class="" fill="#FFFFFF">
-                      <use xlink:href="#shape_JPJeNRfroa"></use>
-                    </svg></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="GROUP100" class='ladi-element'>
-          <div class='ladi-group'>
-            <div id="GROUP79" class='ladi-element'>
-              <div class='ladi-group'>
-                <div id="IMAGE68" class='ladi-element'>
-                  <div class='ladi-image'>
-                    <div class="ladi-image-background"></div>
-                  </div>
-                </div>
-                <div id="HEADLINE68" class='ladi-element'>
-                  <h3 class='ladi-headline ladi-transition'>Cho vay khách hàng có lịch sử vay tại các tổ chức tín
-                    dụng&nbsp;<br></h3>
-                </div>
-                <div id="HEADLINE69" class='ladi-element'>
-                  <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Giải ngân trực tiếp, thủ tục
-                      nhanh gọn cho Khách hàng có khoản vay và lịch sử trả nợ tốt tại Công ty tài chính khác hoặc Ngân
-                      hàng, và thu nhập chỉ từ 3 triệu đồng</span><br></h3>
-                </div>
-                <div id="GROUP80" class='ladi-element'>
-                  <div class='ladi-group'>
-                    <div id="HEADLINE70" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Số tiền vay (tối
-                          đa)</span><br></h3>
-                    </div>
-                    <div id="HEADLINE71" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Lãi suất (tạm
-                          tính) *</span><br></h3>
-                    </div>
-                    <div id="LINE36" class='ladi-element'>
-                      <div class='ladi-line'>
-                        <div class="ladi-line-container"></div>
-                      </div>
-                    </div>
-                    <div id="LINE37" class='ladi-element'>
-                      <div class='ladi-line'>
-                        <div class="ladi-line-container"></div>
-                      </div>
-                    </div>
-                    <div id="HEADLINE72" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'>100 triệu</h3>
-                    </div>
-                    <div id="HEADLINE73" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'><span
-                          style="font-size: 22px; color: rgb(231, 37, 43);">1.98%</span> /tháng</h3>
-                    </div>
-                    <div id="LINE38" class='ladi-element'>
-                      <div class='ladi-line'>
-                        <div class="ladi-line-container"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div data-action="true" id="GROUP95" class='ladi-element'>
-              <div class='ladi-group'>
-                <div id="BUTTON23" class='ladi-element'>
-                  <div class='ladi-button ladi-transition'>
-                    <div class="ladi-button-background"></div>
-                    <div id="BUTTON_TEXT23" class='ladi-element ladi-button-headline'>
-                      <p class='ladi-headline ladi-transition'>Đăng ký ngay&nbsp; &nbsp;</p>
-                    </div>
-                  </div>
-                </div>
-                <div id="SHAPE15" class='ladi-element'>
-                  <div class='ladi-shape'><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
-                      preserveAspectRatio="none" viewBox="0 0 24 24" class="" fill="#FFFFFF">
-                      <use xlink:href="#shape_JPJeNRfroa"></use>
-                    </svg></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="GROUP99" class='ladi-element'>
-          <div class='ladi-group'>
-            <div id="GROUP81" class='ladi-element'>
-              <div class='ladi-group'>
-                <div id="IMAGE69" class='ladi-element'>
-                  <div class='ladi-image'>
-                    <div class="ladi-image-background"></div>
-                  </div>
-                </div>
-                <div id="HEADLINE74" class='ladi-element'>
-                  <h3 class='ladi-headline ladi-transition'>Cho vay khách hàng<br>là chủ kinh doanh<br></h3>
-                </div>
-                <div id="HEADLINE75" class='ladi-element'>
-                  <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Chỉ cần cung cấp sao kê ngân
-                      hàng, Khách hàng là chủ hộ kinh doanh, chủ doanh nghiệp, kinh doanh online có thể được hỗ trợ
-                      khoản vay nhanh chóng, chớp cơ hội kinh doanh</span><br></h3>
-                </div>
-                <div id="GROUP82" class='ladi-element'>
-                  <div class='ladi-group'>
-                    <div id="HEADLINE76" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Số tiền vay (tối
-                          đa)</span><br></h3>
-                    </div>
-                    <div id="HEADLINE77" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Thời gian vay tối
-                          đa</span><br></h3>
-                    </div>
-                    <div id="LINE39" class='ladi-element'>
-                      <div class='ladi-line'>
-                        <div class="ladi-line-container"></div>
-                      </div>
-                    </div>
-                    <div id="LINE40" class='ladi-element'>
-                      <div class='ladi-line'>
-                        <div class="ladi-line-container"></div>
-                      </div>
-                    </div>
-                    <div id="HEADLINE78" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'>40 triệu</h3>
-                    </div>
-                    <div id="HEADLINE79" class='ladi-element'>
-                      <h3 class='ladi-headline ladi-transition'><span
-                          style="font-size: 22px; color: rgb(231, 37, 43);">24</span> tháng</h3>
-                    </div>
-                    <div id="LINE41" class='ladi-element'>
-                      <div class='ladi-line'>
-                        <div class="ladi-line-container"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div data-action="true" id="GROUP96" class='ladi-element'>
-              <div class='ladi-group'>
-                <div id="BUTTON24" class='ladi-element'>
-                  <div class='ladi-button ladi-transition'>
-                    <div class="ladi-button-background"></div>
-                    <div id="BUTTON_TEXT24" class='ladi-element ladi-button-headline'>
-                      <p class='ladi-headline ladi-transition'>Đăng ký ngay&nbsp; &nbsp;</p>
-                    </div>
-                  </div>
-                </div>
-                <div id="SHAPE16" class='ladi-element'>
-                  <div class='ladi-shape'><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
-                      preserveAspectRatio="none" viewBox="0 0 24 24" class="" fill="#FFFFFF">
-                      <use xlink:href="#shape_JPJeNRfroa"></use>
-                    </svg></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <div id="GROUP98" class='ladi-element swirl-card-container'>
+          <div class="swirl-flipper">
+            <div class="swirl-front">
+              <div class='ladi-group'>
+                <div id="GROUP73" class='ladi-element'><div class='ladi-group'><div id="IMAGE66" class='ladi-element'><div class='ladi-image'><div class="ladi-image-background"></div></div></div><div id="HEADLINE56" class='ladi-element'><h3 class='ladi-headline ladi-transition'>Cho vay khách hàng là phụ nữ <br></h3></div><div id="HEADLINE57" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Chỉ cần có thu nhập từ 3 triệu đồng, khách hàng/ chồng khách hàng sở hữu đăng ký xe máy có thể vay với lãi suất ưu đãi</span><br></h3></div><div id="GROUP74" class='ladi-element'><div class='ladi-group'><div id="HEADLINE58" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Số tiền vay (tối đa)</span><br></h3></div><div id="HEADLINE59" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Lãi suất (tạm tính) *</span><br></h3></div><div id="LINE30" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div><div id="LINE31" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div><div id="HEADLINE60" class='ladi-element'><h3 class='ladi-headline ladi-transition'>50 triệu</h3></div><div id="HEADLINE61" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-size: 22px; color: rgb(231, 37, 43);">2.09%</span> /tháng</h3></div><div id="LINE32" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div></div></div></div></div>
+                <div data-action="true" id="GROUP93" class='ladi-element'><div class='ladi-group'><div id="BUTTON21" class='ladi-element'><div class='ladi-button ladi-transition'><div class="ladi-button-background"></div><div id="BUTTON_TEXT21" class='ladi-element ladi-button-headline'><p class='ladi-headline ladi-transition'>Đăng ký ngay   </p></div></div></div><div id="SHAPE13" class='ladi-element'><div class='ladi-shape'><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 24 24" fill="#FFFFFF"><use xlink:href="#shape_JPJeNRfroa"></use></svg></div></div></div></div>
+              </div>
+            </div>
+            <div class="swirl-back">
+              <div class="back-content-wrapper">
+                <div class="back-content">
+                  <img src="./ladi/icon-cash-in-hand.png" alt="icon" class="back-icon">
+                  <h3 class="back-title">Cho vay khách hàng<br>là phụ nữ</h3>
+                  <div class="back-divider"></div>
+                  <ul class="back-list">
+                    <li>Độ tuổi: 20-60</li>
+                    <li>KH đã từng vay vốn hoặc đang vay tại các tổ chức tín dụng (TCTD)</li>
+                    <li>KH hoặc chồng sở hữu xe máy có đăng ký ≤ 8 năm (tròn năm) tính đến thời điểm thẩm định</li>
+                    <li>Thu nhập bình quân ≥ 3 triệu</li>
+                  </ul>
+                  <div class="back-divider"></div>
+                  <div class="back-button-wrapper" data-action="true" onclick="document.getElementById('BUTTON11').click()">
+                    <div class='ladi-button'>
+                      <div class='ladi-element ladi-button-headline'>
+                        <p class='ladi-headline'>Đăng ký ngay →</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="GROUP101" class='ladi-element swirl-card-container'>
+          <div class="swirl-flipper">
+            <div class="swirl-front">
+              <div class='ladi-group'>
+                <div id="GROUP77" class='ladi-element'><div class='ladi-group'><div id="IMAGE67" class='ladi-element'><div class='ladi-image'><div class="ladi-image-background"></div></div></div><div id="HEADLINE62" class='ladi-element'><h3 class='ladi-headline ladi-transition'>Cho vay khách hàng<br>có hợp đồng bảo hiểm nhân thọ<br></h3></div><div id="HEADLINE63" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Dành cho Khách hàng hoặc vợ/chồng KH có hợp đồng bảo hiểm nhân thọ, đóng phí từ 5 triệu đồng/năm với thủ tục đơn giản, nhanh chóng</span><br></h3></div><div id="GROUP78" class='ladi-element'><div class='ladi-group'><div id="HEADLINE64" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Số tiền vay (tối đa)</span><br></h3></div><div id="HEADLINE65" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Lãi suất (tạm tính) *</span><br></h3></div><div id="LINE33" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div><div id="LINE34" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div><div id="HEADLINE66" class='ladi-element'><h3 class='ladi-headline ladi-transition'>100 triệu</h3></div><div id="HEADLINE67" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-size: 22px; color: rgb(231, 37, 43);">1.92%</span> /tháng</h3></div><div id="LINE35" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div></div></div></div></div>
+                <div data-action="true" id="GROUP94" class='ladi-element'><div class='ladi-group'><div data-action="true" id="BUTTON22" class='ladi-element'><div class='ladi-button ladi-transition'><div class="ladi-button-background"></div><div id="BUTTON_TEXT22" class='ladi-element ladi-button-headline'><p class='ladi-headline ladi-transition'>Đăng ký ngay   </p></div></div></div><div id="SHAPE14" class='ladi-element'><div class='ladi-shape'><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 24 24" fill="#FFFFFF"><use xlink:href="#shape_JPJeNRfroa"></use></svg></div></div></div></div>
+              </div>
+            </div>
+            <div class="swirl-back">
+              <div class="back-content-wrapper">
+                <div class="back-content">
+                  <img src="./ladi/icon-cash-in-hand.png" alt="icon" class="back-icon">
+                  <h3 class="back-title">Cho vay khách hàng<br>có hợp đồng bảo hiểm nhân thọ</h3>
+                  <div class="back-divider"></div>
+                  <ul class="back-list">
+                    <li>Độ tuổi: 20-60</li>
+                    <li>Hợp đồng BHNT đã mở được từ 6 tháng trở lên và còn hiệu lực</li>
+                    <li>Phí bảo hiểm: >= 5 triệu đồng/năm</li>
+                    <li>Người mua hợp đồng BHNT là KH hoặc chồng KH (Trường hợp chồng KH là mua BHNT thì người thụ hưởng/người được bảo hiểm trên Hợp đồng BHNT bắt buộc là KH);</li>
+                    <li>KH không phát sinh khoản vay mới trong vòng 1 tháng gần nhất tính đến thời điểm nộp hồ sơ vay vốn tại LOTTE Finance</li>
+                  </ul>
+                  <div class="back-divider"></div>
+                  <div class="back-button-wrapper" data-action="true" onclick="document.getElementById('BUTTON11').click()">
+                    <div class='ladi-button'>
+                      <div class='ladi-element ladi-button-headline'>
+                        <p class='ladi-headline'>Đăng ký ngay →</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- THẺ VAY 5: Lịch sử vay -->
+        <div id="GROUP100" class='ladi-element swirl-card-container'>
+          <div class="swirl-flipper">
+            <div class="swirl-front">
+              <div class='ladi-group'>
+                <div id="GROUP79" class='ladi-element'><div class='ladi-group'><div id="IMAGE68" class='ladi-element'><div class='ladi-image'><div class="ladi-image-background"></div></div></div><div id="HEADLINE68" class='ladi-element'><h3 class='ladi-headline ladi-transition'>Cho vay khách hàng có lịch sử vay tại các tổ chức tín dụng <br></h3></div><div id="HEADLINE69" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Giải ngân trực tiếp, thủ tục nhanh gọn cho Khách hàng có khoản vay và lịch sử trả nợ tốt tại Công ty tài chính khác hoặc Ngân hàng, và thu nhập chỉ từ 3 triệu đồng</span><br></h3></div><div id="GROUP80" class='ladi-element'><div class='ladi-group'><div id="HEADLINE70" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Số tiền vay (tối đa)</span><br></h3></div><div id="HEADLINE71" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Lãi suất (tạm tính) *</span><br></h3></div><div id="LINE36" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div><div id="LINE37" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div><div id="HEADLINE72" class='ladi-element'><h3 class='ladi-headline ladi-transition'>100 triệu</h3></div><div id="HEADLINE73" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-size: 22px; color: rgb(231, 37, 43);">1.98%</span> /tháng</h3></div><div id="LINE38" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div></div></div></div></div>
+                <div data-action="true" id="GROUP95" class='ladi-element'><div class='ladi-group'><div id="BUTTON23" class='ladi-element'><div class='ladi-button ladi-transition'><div class="ladi-button-background"></div><div id="BUTTON_TEXT23" class='ladi-element ladi-button-headline'><p class='ladi-headline ladi-transition'>Đăng ký ngay   </p></div></div></div><div id="SHAPE15" class='ladi-element'><div class='ladi-shape'><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 24 24" fill="#FFFFFF"><use xlink:href="#shape_JPJeNRfroa"></use></svg></div></div></div></div>
+              </div>
+            </div>
+            <div class="swirl-back">
+              <div class="back-content-wrapper">
+                <div class="back-content" style="margin-top: 90px;">
+                  <img src="./ladi/icon-cash-in-hand.png" alt="icon" class="back-icon">
+                  <h3 class="back-title">Cho vay khách hàng có lịch sử vay tại các tổ chức tín dụng</h3>
+                  <div class="back-divider"></div>
+                  <ul class="back-list" style="list-style-type: none; margin: 0; padding: 0;">
+                    <li>Để tìm hiểu thêm về điều kiện vay, vui lòng đăng ký hoặc gọi Hotline <strong style="color: rgb(231, 37, 43);">1900 633 070</strong></li>
+                  </ul>
+                  <div class="back-divider"></div>
+                  <div class="back-button-wrapper" data-action="true" onclick="document.getElementById('BUTTON11').click()">
+                    <div class='ladi-button'>
+                      <div class='ladi-element ladi-button-headline'>
+                        <p class='ladi-headline'>Đăng ký ngay →</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="GROUP99" class='ladi-element swirl-card-container'>
+          <div class="swirl-flipper">
+            <div class="swirl-front">
+              <div class='ladi-group'>
+                <div id="GROUP81" class='ladi-element'><div class='ladi-group'><div id="IMAGE69" class='ladi-element'><div class='ladi-image'><div class="ladi-image-background"></div></div></div><div id="HEADLINE74" class='ladi-element'><h3 class='ladi-headline ladi-transition'>Cho vay khách hàng<br>là chủ kinh doanh<br></h3></div><div id="HEADLINE75" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Chỉ cần cung cấp sao kê ngân hàng, Khách hàng là chủ hộ kinh doanh, chủ doanh nghiệp, kinh doanh online có thể được hỗ trợ khoản vay nhanh chóng, chớp cơ hội kinh doanh</span><br></h3></div><div id="GROUP82" class='ladi-element'><div class='ladi-group'><div id="HEADLINE76" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Số tiền vay (tối đa)</span><br></h3></div><div id="HEADLINE77" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-weight: 400;">Thời gian vay tối đa</span><br></h3></div><div id="LINE39" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div><div id="LINE40" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div><div id="HEADLINE78" class='ladi-element'><h3 class='ladi-headline ladi-transition'>40 triệu</h3></div><div id="HEADLINE79" class='ladi-element'><h3 class='ladi-headline ladi-transition'><span style="font-size: 22px; color: rgb(231, 37, 43);">24</span> tháng</h3></div><div id="LINE41" class='ladi-element'><div class='ladi-line'><div class="ladi-line-container"></div></div></div></div></div></div></div>
+                <div data-action="true" id="GROUP96" class='ladi-element'><div class='ladi-group'><div id="BUTTON24" class='ladi-element'><div class='ladi-button ladi-transition'><div class="ladi-button-background"></div><div id="BUTTON_TEXT24" class='ladi-element ladi-button-headline'><p class='ladi-headline ladi-transition'>Đăng ký ngay   </p></div></div></div><div id="SHAPE16" class='ladi-element'><div class='ladi-shape'><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 24 24" fill="#FFFFFF"><use xlink:href="#shape_JPJeNRfroa"></use></svg></div></div></div></div>
+              </div>
+            </div>
+            <div class="swirl-back">
+              <div class="back-content-wrapper">
+                <div class="back-content" style="margin-top: 90px;">
+                  <img src="./ladi/icon-cash-in-hand.png" alt="icon" class="back-icon">
+                  <h3 class="back-title">Cho vay khách hàng<br>là chủ kinh doanh</h3>
+                  <div class="back-divider"></div>
+                  <ul class="back-list" style="list-style-type: none; margin: 0; padding: 0;">
+                    <li>Để tìm hiểu thêm về điều kiện vay, vui lòng đăng ký hoặc gọi Hotline <strong style="color: rgb(231, 37, 43);">1900 633 070</strong></li>
+                  </ul>
+                  <div class="back-divider"></div>
+                  <div class="back-button-wrapper" data-action="true" onclick="document.getElementById('BUTTON11').click()">
+                    <div class='ladi-button'>
+                      <div class='ladi-element ladi-button-headline'>
+                        <p class='ladi-headline'>Đăng ký ngay →</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div id="IMAGE85" class='ladi-element'>
           <div class='ladi-image'>
             <div class="ladi-image-background"></div>
@@ -8267,145 +8206,7 @@
         </div>
       </div>
     </div>
-    <div id="SECTION5" class='ladi-section'>
-      <div class='ladi-section-background'></div>
-      <div class="ladi-container">
-        <div id="IMAGE91" class='ladi-element'>
-          <div class='ladi-image'>
-            <div class="ladi-image-background"></div>
-          </div>
-        </div>
-        <div id="IMAGE71" class='ladi-element'>
-          <div class='ladi-image'>
-            <div class="ladi-image-background"></div>
-          </div>
-        </div>
-        <div id="BOX28" class='ladi-element'>
-          <div class='ladi-box ladi-transition'></div>
-        </div>
-        <div id="PARAGRAPH59" class='ladi-element'>
-          <div class='ladi-paragraph'>Ước tính khoản vay</div>
-        </div>
-        <div id="GROUP112" class='ladi-element'>
-          <div class='ladi-group'>
-            <div id="BOX29" class='ladi-element'>
-              <div class='ladi-box ladi-transition'></div>
-            </div>
-            <div id="PARAGRAPH66" class='ladi-element'>
-              <div class='ladi-paragraph'>Số tiền phải trả hàng tháng</div>
-            </div>
-            <div id="PARAGRAPH67" class='ladi-element'>
-              <div class='ladi-paragraph'><span style="color: rgb(231, 37, 43); font-weight: bold;">*Lưu ý:</span> Kết
-                quả tính toán này chỉ mang tính chất tham khảo và có thể sai lệch nhỏ với kết quả tính toán thực tế
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="HTML_CODE1" class='ladi-element'>
-          <div class='ladi-html-code'>
-            <div class="flex flex-col px-7 gap-6">
-              <form action="#" class="flex flex-col gap-6 form-register">
-                <div class="flex flex-col justify-start w-full gap-4">
-                  <div class="flex justify-between items-center">
-                    <label for="amount-rate" class="block mb-2 text-sm font-medium">
-                      <h5>Số tiền vay (VND)</h5>
-                    </label>
-                    <div class="border border-red p-2 pl-4 rounded-lg" style="border: 1px solid #e7252b !important;">
-                      <p>
-                        <span id="amount-rate-result" class="text-sm font-medium"></span>
-                        <span class="text-gray-400">VND</span>
-                      </p>
-                    </div>
-                  </div>
-                  <input id="amount-rate" type="range" min="10000000" max="500000000" step="5000000"
-                    class="w-full h-1 bg-[#FFDAD6] accent-white rounded-lg appearance-none cursor-pointer range-sm">
-                  <div class="flex justify-between">
-                    <p class="text-gray-400">Tối thiểu 10.000.000 VND</p>
-                    <p class="text-gray-400">Tối đa 500.000.000 VND</p>
-                  </div>
-                </div>
-                <div class="flex flex-col justify-start w-full gap-4">
-                  <div class="flex justify-between items-center">
-                    <label for="month" class="block mb-2 text-sm font-medium">
-                      <h5>Thời gian vay (tháng)</h5>
-                    </label>
-                    <div class="border border-red p-2 pl-4 rounded-lg" style="border: 1px solid #e7252b !important;">
-                      <p>
-                        <span id="month-result" class="text-sm font-medium"></span>
-                        <span class="text-gray-400">tháng</span>
-                      </p>
-                    </div>
-                  </div>
-                  <input id="month" type="range" min="6" max="60"
-                    class="w-full h-1 bg-[#FFDAD6] accent-white rounded-lg appearance-none cursor-pointer range-sm">
-                  <div class="flex justify-between">
-                    <p class="text-gray-400">Tối thiểu 6 tháng</p>
-                    <p class="text-gray-400">Tối đa 60 tháng</p>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div id="HTML_CODE2" class='ladi-element'>
-          <div class='ladi-html-code'>
-            <div
-              class="flex bg-[#FFDBDB] w-full justify-center rounded-lg border h-16 border-[#E7252B] border-dashed gap-2 items-center"
-              style="border-style: dashed !important; border-color: rgb(231 37 43 / var(--tw-border-opacity)) !important;">
-              <h2 class="font-semibold" id="invoice-amount"></h2>
-              <h3>VND</h3>
-            </div>
-          </div>
-        </div>
-        <div id="IMAGE70" class='ladi-element'>
-          <div class='ladi-image'>
-            <div class="ladi-image-background"></div>
-          </div>
-        </div>
-        <div data-action="true" id="GROUP115" class='ladi-element'>
-          <div class='ladi-group'>
-            <div id="BUTTON28" class='ladi-element'>
-              <div class='ladi-button ladi-transition'>
-                <div class="ladi-button-background"></div>
-                <div id="BUTTON_TEXT28" class='ladi-element ladi-button-headline'>
-                  <p class='ladi-headline ladi-transition'>Đăng ký ngay&nbsp; &nbsp;</p>
-                </div>
-              </div>
-            </div>
-            <div id="SHAPE18" class='ladi-element'>
-              <div class='ladi-shape'><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
-                  preserveAspectRatio="none" viewBox="0 0 24 24" class="" fill="#FFFFFF">
-                  <use xlink:href="#shape_JPJeNRfroa"></use>
-                </svg></div>
-            </div>
-          </div>
-        </div>
-        <div id="PARA-EXAMPLE" class='ladi-element'>
-          <p>Lãi suất minh họa : 18%/năm (tính trên dư nợ giảm dần)</p>
-          <p>
-            - Giá trị khoản vay: từ 10 triệu – 500 triệu đồng <br>
-            - Thời gian vay: từ 06 tháng - 60 tháng <br>
-            - Lãi suất và chi phí vay, trong đó : <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;+ Lãi suất tối đa 25,1 %/năm (tính trên dư nợ ban đầu) <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;+ Chi phí vay: Không có bất kỳ chi phí nào ngoại trừ phí thanh toán trước hạn hoặc
-            phí trả chậm (nếu có)
-          </p>
-          <p style="font-style: italic;margin-top: 10px;"><strong>Ví dụ:</strong> Với khoản vay tiêu dùng 10 triệu đồng,
-            thời hạn vay 12 tháng, lãi suất 18%/ năm tính trên dư nợ giảm dần (tương đương 10 %/năm lãi suất tính trên
-            dư nợ ban đầu). Với các phương thức thanh toán nợ gốc, lãi hàng tháng, số tiền hàng tháng phải trả là
-            917.000 VND. Trong đó:
-          </p>
 
-          <p style="font-style: italic;">
-            - Lãi suất mỗi tháng là: 83.333 VND <br>
-            - Số tiền nợ gốc mỗi tháng là: 833.667 VND <br>
-            - Chi phí vay: 0 VND
-          </p>
-          <p style="font-style: italic;">Như vậy, tổng số tiền phải thanh toán bao gồm tiền nợ gốc và lãi là 11.000.000
-            VND</p>
-        </div>
-      </div>
-    </div>
     <div id="SECTION6" class='ladi-section'>
       <div class='ladi-section-background'></div>
       <div class="ladi-container">
@@ -8710,6 +8511,72 @@
         </div>
       </div>
     </div>
+
+    <div id="NEWS_SECTION" class="ladi-section">
+      <div class="ladi-section-background" style="background-color: rgb(244, 245, 247);"></div>
+      <div class="ladi-container">
+
+        <!-- Tiêu đề mục -->
+        <div class="news-title-group">
+          <h2 class="news-title">Báo chí nói về chúng tôi</h2>
+          <div class="news-title-underline"></div>
+        </div>
+
+        <div class="news-slider-arrow news-arrow-left"></div>
+        <div class="news-slider-arrow news-arrow-right"></div>
+
+        <div class="news-slider-container">
+          <div class="news-slider-content">
+            <a href="https://vnexpress.net/lotte-finance-huong-den-nhom-khach-hang-cong-chuc-vien-chuc-4749870.html" target="_blank" class="news-card">
+              <img src="./ladi/news-paper-1.png" alt="Lotte Finance hướng đến nhóm khách hàng công chức, viên chức">
+              <div class="news-card-body">
+                <h3 class="news-card-title">Lotte Finance hướng đến nhóm khách hàng công chức, viên chức</h3>
+                <p class="news-card-description">Lotte Finance áp dụng nhiều ưu đãi, tăng hạn mức cho vay với khách hàng là công chức, viên chức hoặc người lao động đang hưởng lương từ ngân sách nhà nước...</p>
+                <span class="news-card-source">vnexpress.net</span>
+              </div>
+            </a>
+            <a href="https://dantri.com.vn/kinh-doanh/lotte-finance-cho-dua-tai-chinh-cho-khach-hang-20240409172051657.htm" target="_blank" class="news-card">
+              <img src="./ladi/news-paper-2.png" alt="LOTTE Finance - Chỗ dựa tài chính cho khách hàng">
+              <div class="news-card-body">
+                <h3 class="news-card-title">LOTTE Finance - Chỗ dựa tài chính cho khách hàng</h3>
+                <p class="news-card-description">(Dân trí) - Từ 8/4 đến 30/9/2024, LOTTE Finance mang đến khách hàng cơ hội sở hữu nhiều phần quà thiết thực, cùng các đặc quyền ưu đãi cho vay tiêu dùng hấp dẫn...</p>
+                <span class="news-card-source">dantri.com.vn</span>
+              </div>
+            </a>
+            <a href="https://vnexpress.net/lotte-finance-day-manh-dich-vu-tai-chinh-tieu-dung-4740707.html" target="_blank" class="news-card">
+              <img src="./ladi/news-paper-3.png" alt="Lotte Finance đẩy mạnh dịch vụ tài chính tiêu dùng">
+              <div class="news-card-body">
+                <h3 class="news-card-title">Lotte Finance đẩy mạnh dịch vụ tài chính tiêu dùng</h3>
+                <p class="news-card-description">Sau khi được Ngân hàng Nhà nước chấp thuận tăng 68 triệu USD, nâng tổng vốn điều lệ lên hơn 4.186 tỷ đồng, Lotte Finance đẩy mạnh nhiều chương trình khuyến mại...</p>
+                <span class="news-card-source">vnexpress.net</span>
+              </div>
+            </a>
+
+            <a href="https://vnexpress.net/lotte-finance-day-manh-dich-vu-tai-chinh-tieu-dung-4740707.html" target="_blank" class="news-card">
+              <img src="./ladi/news-paper-3.png" alt="Lotte Finance đẩy mạnh dịch vụ tài chính tiêu dùng">
+              <div class="news-card-body">
+                <h3 class="news-card-title">Lotte Finance đẩy mạnh dịch vụ tài chính tiêu dùng</h3>
+                <p class="news-card-description">Sau khi được Ngân hàng Nhà nước chấp thuận tăng 68 triệu USD, nâng tổng vốn điều lệ lên hơn 4.186 tỷ đồng, Lotte Finance đẩy mạnh nhiều chương trình khuyến mại...</p>
+                <span class="news-card-source">vnexpress.net</span>
+              </div>
+            </a>
+
+            <a href="https://vnexpress.net/lotte-finance-day-manh-dich-vu-tai-chinh-tieu-dung-4740707.html" target="_blank" class="news-card">
+              <img src="./ladi/news-paper-3.png" alt="Lotte Finance đẩy mạnh dịch vụ tài chính tiêu dùng">
+              <div class="news-card-body">
+                <h3 class="news-card-title">Lotte Finance đẩy mạnh dịch vụ tài chính tiêu dùng</h3>
+                <p class="news-card-description">Sau khi được Ngân hàng Nhà nước chấp thuận tăng 68 triệu USD, nâng tổng vốn điều lệ lên hơn 4.186 tỷ đồng, Lotte Finance đẩy mạnh nhiều chương trình khuyến mại...</p>
+                <span class="news-card-source">vnexpress.net</span>
+              </div>
+            </a>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="SECTION8" class='ladi-section'>
       <div class='ladi-section-background'></div>
       <div class="ladi-container">
@@ -8748,6 +8615,15 @@
         <div id="IMAGE87" class='ladi-element'>
           <div class='ladi-image'>
             <div class="ladi-image-background"></div>
+          </div>
+        </div>
+        <div id="customer-counter-wrapper">
+          <div id="customer-counter-inner">
+            <img src="./ladi/icon-face.gif" alt="Happy customer icon" class="counter-icon">
+            <div class="counter-text-group">
+              <div id="scrolling-counter" class="scrolling-counter"></div>
+              <p class="counter-text">Khách hàng đã đăng ký vay tại LOTTE Finance</p>
+            </div>
           </div>
         </div>
         <div data-action="true" id="GROUP116" class='ladi-element'>
@@ -9568,6 +9444,13 @@
       </div>
     </div>
   </div>
+  </div>
+  <div id="fixed-register-button">
+    <img src="./ladi/fixed-regis-button-desktop.png" alt="Đăng ký vay ngay">
+  </div>
+  <div id="fixed-mobile-cta-wrapper">
+    <button id="fixed-mobile-cta">Đăng ký ngay</button>
+  </div>
   <div id="loading"></div>
   <!--[if lt IE 9]><script src="./assets/js/dist/html5shiv.min.js"></script><script src="./assets/js/dist/respond.min.js"></script><![endif]-->
   <style type="text/css">
@@ -10012,6 +9895,967 @@
       }
     }
   </style>
+  <style>
+    #SECTION2 .ladi-section-background {
+      overflow: hidden;
+    }
+
+    /*.slide-gif {*/
+    /*  background-image: url('./ladi/vay4buoc.gif');*/
+    /*}*/
+
+    .slide-static {
+      background-image: url('./ladi/kv-vay-nhanh-lai-canh-tranh-1000x310-1-20240318111907-iu7ag.png');
+    }
+
+
+    /* --- Ảnh nền cho Mobile (màn hình nhỏ hơn hoặc bằng 767px) --- */
+    @media (max-width: 767px) {
+      /* Ghi đè ảnh GIF cho màn hình mobile */
+      .slide-gif {
+        background-image: url('./ladi/vay4buocmb.gif');
+      }
+
+      /* Nếu ảnh tĩnh cũng cần thay đổi cho mobile, bạn sẽ thêm nó ở đây */
+      /* .slide-static { background-image: url('./path/to/mobile-static-image.png'); } */
+    }
+
+    .slider-wrapper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slider {
+      display: flex;
+      width: 200%;
+      height: 100%;
+      /*animation: slide-with-pauses 30s infinite;*/
+    }
+
+    .slide {
+      width: 33.333%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      flex-shrink: 0;
+    }
+
+    .slide-video {
+      position: relative;
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    .slide-video video {
+      position: absolute;
+      /*transform: translate(-50%, -50%);*/
+      min-width: 120%;
+      min-height: 100%;
+      /*width: auto;*/
+      height: auto;
+      z-index: 10;
+      object-fit: cover;
+    }
+
+    @media (min-width: 768px) {
+      .slider-arrow.left {
+        left: -220px;
+        background-image: url("./ladi/slider-arrow-2.png");
+      }
+
+      .slider-arrow.right {
+        right: -220px;
+        background-image: url("./ladi/slider-arrow.png");
+      }
+
+      .slider-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 33.54px;
+        height: 80px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        cursor: pointer;
+        z-index: 10;
+      }
+    }
+
+
+    @keyframes slide-with-pauses {
+      /*0% {*/
+      /*  transform: translateX(0%);*/
+      /*}*/
+      /*45% {*/
+      /*  transform: translateX(0%);*/
+      /*}*/
+
+      /*50% {*/
+      /*  transform: translateX(-33.333%);*/
+      /*}*/
+      /*95% {*/
+      /*  transform: translateX(-33.333%);*/
+      /*}*/
+
+      /*100% {*/
+      /*  transform: translateX(-66.666%);*/
+      /*}*/
+    }
+
+    /*#SECTION2 .slider {*/
+    /*  display: flex;*/
+    /*  height: 100%;*/
+    /*}*/
+
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 33.54px;
+      height: 80px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    /*.slider-arrow.left {*/
+    /*  left: -220px;*/
+    /*  background-image: url("./ladi/slider-arrow-2.png");*/
+    /*}*/
+
+    /*.slider-arrow.right {*/
+    /*  right: -220px;*/
+    /*  background-image: url("./ladi/slider-arrow.png");*/
+    /*}*/
+
+
+    .swirl-card-container {
+      perspective: 1500px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .swirl-flipper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .swirl-card-container:hover .swirl-flipper {
+      transform: rotateY(180deg);
+    }
+
+    @media (min-width: 768px) {
+      .swirl-card-container:hover .swirl-flipper {
+        transform: rotateY(180deg);
+      }
+      .swirl-card-container:hover .back-content-wrapper {
+        transform: translateY(0); /* Hiện mặt sau khi hover */
+      }
+    }
+
+    /* --- Logic cho Mobile (dùng class .is-flipped) --- */
+    @media (max-width: 767px) {
+      .swirl-card-container.is-flipped .swirl-flipper {
+        transform: rotateY(180deg);
+      }
+      .swirl-card-container.is-flipped .back-content-wrapper {
+        transform: translateY(0); /* Hiện mặt sau khi có class .is-flipped */
+      }
+    }
+
+    .swirl-front,
+    .swirl-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .swirl-front {
+      z-index: 2;
+    }
+
+    .swirl-back {
+      background-color: transparent;
+      transform: rotateY(180deg);
+    }
+
+    .back-content-wrapper {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transform: translateY(100%); /* Mặc định: ẩn mặt sau ở dưới */
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+
+    .swirl-card-container:hover .back-content-wrapper {
+      transform: translateY(0);
+    }
+
+
+    .back-content {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 70px 20px 20px 20px;nh sát */
+      box-sizing: border-box;
+    }
+    .back-icon {
+      width: 71.5px;
+      height: 71.5px;
+      flex-shrink: 0;
+    }
+
+    .back-divider {
+      width: 100%;
+      height: 1px;
+      background-color: #e0e0e0;
+      flex-shrink: 0;
+      margin: 15px 0;
+    }
+
+    .back-title {
+      font-size: 22px;
+      font-weight: bold;
+      color: rgb(231, 37, 43);
+      text-align: left;
+      line-height: 1.3;
+      margin-bottom: 0px;
+      flex-shrink: 0;
+    }
+    .back-list {
+      list-style-type: disc;
+      padding-left: 20px;
+      text-align: left;
+      font-size: 15px;
+      color: #333;
+      overflow-y: auto;
+      margin-bottom: 0px;
+    }
+    .back-list li {
+      margin-top: 5px;
+      line-height: 1.4;
+    }
+    .back-button-wrapper {
+      position: relative;
+      width: 150px;
+      height: 38px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .back-button-wrapper .ladi-button {
+      background-color: rgb(231, 37, 43);
+      border-radius: 100px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-button-wrapper .ladi-headline {
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+      line-height: 1;
+    }
+
+    #NEWS_SECTION {
+      padding: 60px 0;
+      height: auto !important;
+    }
+
+    #NEWS_SECTION .ladi-section-background {
+      background-color: rgb(244, 245, 247);
+    }
+
+    .news-title-group {
+      margin-bottom: 40px;
+    }
+
+    .news-title {
+      line-height: 1.6;
+      font-weight: bold;
+      font-size: 32px;
+      color: rgb(0, 0, 0);
+    }
+
+    .news-title-underline {
+      width: 98px;
+      height: 4px;
+      background-color: rgb(231, 37, 43);
+      margin-top: 15px;
+    }
+
+    .news-slider-container {
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .news-slider-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .news-slider-content {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 10px;
+      padding-bottom: 20px;
+    }
+
+    .news-card {
+      display: flex;
+      flex-direction: column;
+      flex: 0 0 31%;
+      min-width: 394px;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .news-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .news-card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .news-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #e7252b;
+      line-height: 100%;
+      margin-bottom: 10px;
+    }
+
+    .news-card-description {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+      flex-grow: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .news-card-source {
+      font-size: 13px;
+      color: #888;
+      margin-top: 15px;
+    }
+
+    .news-slider-arrow {
+      display: none;
+    }
+
+    #fixed-register-button {
+      position: fixed;
+      left: 40px;
+      bottom: 40px;
+      z-index: 9000;
+      cursor: pointer;
+      /*transition: transform 0.2s ease;*/
+      width: 194.75px;
+      height: 54px;
+    }
+
+    /*#fixed-register-button:hover {*/
+    /*  transform: scale(1.05);*/
+    /*}*/
+
+    /*#customer-counter-wrapper {*/
+    /*  position: absolute;*/
+    /*  z-index: 10;*/
+    /*  padding: 3px;*/
+    /*  border-radius: 100px;*/
+    /*  background: linear-gradient(to right, #CC002E, #EC1848, #9A268F);*/
+    /*  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);*/
+    /*  top: 320px;*/
+    /*  left: 640px;*/
+    /*}*/
+
+
+    /*#customer-counter-inner {*/
+    /*  display: flex;*/
+    /*  align-items: center;*/
+    /*  gap: 15px;*/
+    /*  background-color: #fff;*/
+    /*  padding: 12px 17px;*/
+    /*  border-radius: inherit;*/
+    /*  width: 224.06px;*/
+    /*  height: 81.26px;*/
+    /*}*/
+
+    /*.counter-icon {*/
+    /*  width: 60.52px;*/
+    /*  height: 60.52px;*/
+    /*  flex-shrink: 0;*/
+    /*}*/
+
+    /*.counter-text-group {*/
+    /*  text-align: left;*/
+    /*}*/
+
+    /*!* 3. Kỹ thuật tạo chữ gradient cho số đếm *!*/
+    /*.counter-number {*/
+    /*  font-size: 25px;*/
+    /*  line-height: 1.1;*/
+    /*  background: linear-gradient(to right, #CC002E, #EC1848, #9A268F);*/
+    /*  -webkit-background-clip: text;*/
+    /*  background-clip: text;*/
+    /*  color: transparent;*/
+    /*}*/
+
+    /*.counter-text {*/
+    /*  font-size: 10.19px;*/
+    /*  color: #333;*/
+    /*  line-height: 1.4;*/
+    /*  max-width: 200px;*/
+    /*  margin-top: 4px;*/
+    /*}*/
+
+    #customer-counter-wrapper {
+      position: absolute;
+      z-index: 10;
+      padding: 3px;
+      border-radius: 100px;
+      background: linear-gradient(to right, #CC002E, #EC1848, #9A268F);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      top: 320px;
+      left: 640px;
+
+    }
+
+    #customer-counter-inner {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background-color: #fff;
+      padding: 12px 17px;
+      border-radius: inherit;
+      width: 224.06px;
+      height: 81.26px;
+    }
+
+    .counter-icon {
+      width: 60.52px;
+      height: 60.52px;
+      flex-shrink: 0;
+    }
+
+    .counter-text-group {
+      text-align: left;
+    }
+
+    .scrolling-counter {
+      display: flex;
+      height: 30px;
+      line-height: 30px;
+      font-size: 23px;
+      overflow: hidden;
+      --gradient-text: linear-gradient(to right, #CC002E, #EC1848, #9A268F);
+    }
+    .digit-roller {
+      display: inline-block;
+      transition: transform 2.5s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+
+    .digit-roller span {
+      display: block;
+      height: 30px;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .digit-separator {
+      display: inline-block;
+      padding: 0 2px;
+      line-height: 30px;
+      font-size: 23px;
+      font-weight: bold;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .counter-text {
+      font-size: 10.19px;
+      color: #333;
+      line-height: 1.4;
+      max-width: 200px;
+      margin-top: 4px;
+    }
+
+    #IMAGE78 {
+      left: 1230px !important;
+    }
+
+    #fixed-mobile-cta-wrapper {
+      display: none;
+    }
+
+
+    /* Banner slide responsive */
+    @media (max-width: 767px) {
+      .slider {
+        display: flex;
+        width: 300%;
+        height: 100%;
+        animation: slide-with-pauses 30s infinite;
+      }
+
+      @keyframes slide-with-pauses {
+        0% {
+          transform: translateX(0%);
+        }
+        45% {
+          transform: translateX(0%);
+        }
+
+        50% {
+          transform: translateX(-33.333%);
+        }
+        95% {
+          transform: translateX(-33.333%);
+        }
+
+        100% {
+          transform: translateX(-66.666%);
+        }
+      }
+
+      .slide-gif {
+        background-image: url('./ladi/vay4buocmb.gif');
+      }
+
+      .slide-static {
+        background-image: url('./ladi/1-20240318105903-ybtkr.png');
+      }
+
+      .slide.slide-gif {
+        background-size: 420px 628px;
+        background-position: top -30px center;
+      }
+
+      .slider-arrow {
+        width: 15px;
+        height: 20px;
+      }
+      /*.slider-arrow.left {*/
+      /*  left: 10px;*/
+      /*  background-image: url("./ladi/slider-arrow-2.png");*/
+      /*}*/
+      /*.slider-arrow.right {*/
+      /*  right: 10px;*/
+      /*  background-image: url("./ladi/slider-arrow.png");*/
+      /*}*/
+
+      .slider-arrow {
+        position: absolute;
+        top: 45%;
+        transform: translateY(-50%);
+        width: 15px;
+        height: 30px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      #fixed-register-button {
+        display: none;
+      }
+
+
+
+      .news-card {
+        min-width: 420px;
+      }
+
+      .news-slider-arrow {
+        display: block; /* Hiện mũi tên lên */
+        position: absolute;
+        top: 55%;
+        transform: translateY(-50%);
+        width: 25px; /* Kích thước nhỏ cho mobile */
+        height: 25px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-image: url("data:image/svg+xml;utf8, %3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22rgba(244%2C%2064%2C%2037%2C%201)%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M7.00015%200.585938L18.4144%2012.0002L7.00015%2023.4144L5.58594%2022.0002L15.5859%2012.0002L5.58594%202.00015L7.00015%200.585938Z%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E");
+        cursor: pointer;
+        z-index: 10;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .news-slider-arrow:hover {
+        opacity: 1;
+      }
+
+      .news-arrow-left {
+        left: 5px; /* Vị trí bên trong màn hình mobile */
+        transform: translateY(-50%) rotate(180deg);
+      }
+
+      .news-arrow-right {
+        right: 5px; /* Vị trí bên trong màn hình mobile */
+      }
+
+      #fixed-mobile-cta-wrapper {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 9990;
+        background-color: #ffffff;
+        padding: 10px 15px;
+        padding-bottom: 15px;
+        border-top: 5px solid #ffffff;
+        /*box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);*/
+      }
+
+      #fixed-mobile-cta {
+        width: 100%;
+        height: 50px;
+        background-color: rgb(231, 37, 43);
+        color: white;
+        font-size: 18px;
+        /*font-weight: bold;*/
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #customer-counter-wrapper {
+        position: absolute;
+        z-index: 10;
+        padding: 3px;
+        border-radius: 100px;
+        background: linear-gradient(to right, #CC002E, #EC1848, #9A268F);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        left: 15px;
+        top: 700px;
+      }
+
+      #customer-counter-inner {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        background-color: #fff;
+        padding: 12px 17px;
+        border-radius: inherit;
+        width: 194.79px;
+        height: 70px;
+      }
+
+      .counter-icon {
+        width: 52.15px;
+        height: 52.15px;
+        flex-shrink: 0;
+      }
+
+      .counter-text-group {
+        text-align: left;
+      }
+
+      .scrolling-counter {
+        display: flex;
+        height: 30px;
+        line-height: 30px;
+        font-size: 20px;
+        overflow: hidden;
+        --gradient-text: linear-gradient(to right, #CC002E, #EC1848, #9A268F);
+      }
+      .digit-roller {
+        display: inline-block;
+        transition: transform 2.5s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+
+
+      .digit-roller span {
+        display: block;
+        height: 30px;
+        background: var(--gradient-text);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .digit-separator {
+        display: inline-block;
+        padding: 0 2px;
+        line-height: 30px;
+        font-size: 20px;
+        font-weight: bold;
+        background: var(--gradient-text);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .counter-text {
+        font-size: 8.78px;
+        color: #333;
+        line-height: 1.4;
+        max-width: 200px;
+        margin-top: 4px;
+      }
+
+    }
+
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const section2 = document.getElementById('SECTION2');
+      if (!section2) return;
+
+      const slider = section2.querySelector('.slider');
+      const prevButton = section2.querySelector('.slider-arrow.left');
+      const nextButton = section2.querySelector('.slider-arrow.right');
+      let slides = Array.from(section2.querySelectorAll('.slide'));
+
+      if (!slider || !prevButton || !nextButton || slides.length === 0) {
+        console.error('Slider components not found');
+        return;
+      }
+      const firstClone = slides[0].cloneNode(true);
+      const lastClone = slides[slides.length - 1].cloneNode(true);
+
+      firstClone.id = 'first-clone';
+      lastClone.id = 'last-clone';
+
+      slider.appendChild(firstClone);
+      slider.insertBefore(lastClone, slides[0]);
+
+      const allSlides = Array.from(slider.querySelectorAll('.slide'));
+      const slideCount = allSlides.length;
+
+      slider.style.width = `${100 * slideCount}%`;
+      allSlides.forEach(slide => {
+        slide.style.width = `${100 / slideCount}%`;
+      });
+
+      let currentIndex = 1;
+      let isTransitioning = false;
+      function setInitialPosition() {
+        slider.style.transition = 'none';
+        const initialOffset = -100 / slideCount * currentIndex;
+        slider.style.transform = `translateX(${initialOffset}%)`;
+      }
+
+      function moveToSlide(index) {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        const offset = -100 / slideCount * index;
+        slider.style.transition = 'transform 0.5s ease-in-out';
+        slider.style.transform = `translateX(${offset}%)`;
+        currentIndex = index;
+      }
+      slider.addEventListener('transitionend', () => {
+        isTransitioning = false;
+
+        if (allSlides[currentIndex].id === 'first-clone') {
+          slider.style.transition = 'none';
+          currentIndex = 1;
+          const offset = -100 / slideCount * currentIndex;
+          slider.style.transform = `translateX(${offset}%)`;
+        }
+        if (allSlides[currentIndex].id === 'last-clone') {
+          slider.style.transition = 'none';
+          currentIndex = slideCount - 2;
+          const offset = -100 / slideCount * currentIndex;
+          slider.style.transform = `translateX(${offset}%)`;
+        }
+      });
+
+      nextButton.addEventListener('click', () => {
+        moveToSlide(currentIndex + 1);
+      });
+
+      prevButton.addEventListener('click', () => {
+        moveToSlide(currentIndex - 1);
+      });
+
+      setInitialPosition();
+
+      const flipCardsOnMobile = () => {
+        if (window.innerWidth > 767) {
+          return;
+        }
+
+        const cards = document.querySelectorAll('.swirl-card-container');
+
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-flipped');
+            } else {
+              entry.target.classList.remove('is-flipped');
+            }
+          });
+        }, {
+          threshold: 0.6
+        });
+
+        // Bắt đầu quan sát tất cả các thẻ
+        cards.forEach(card => {
+          observer.observe(card);
+        });
+      };
+
+      // Chạy hàm khi trang tải xong
+      flipCardsOnMobile();
+
+      const counterWidget = document.getElementById('customer-counter-wrapper');
+      const counterContainer = document.getElementById('scrolling-counter');
+
+      if (counterWidget && counterContainer) {
+        const startDate = new Date('2025-06-26T00:00:00+07:00');
+        const startValue = 396750;
+        const incrementPerDay = 30810;
+        const maxValue = 1000000;
+
+        const calculateCurrentValue = () => {
+          const now = new Date();
+          const elapsedTime = now.getTime() - startDate.getTime();
+          const elapsedDays = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+          const addedValue = elapsedDays * incrementPerDay;
+          let currentValue = startValue + addedValue;
+          return Math.min(currentValue, maxValue);
+        };
+
+        const finalValue = calculateCurrentValue();
+        const finalValueString = finalValue.toLocaleString('de-DE');
+
+        const createCounter = (valueString) => {
+          counterContainer.innerHTML = '';
+          for (let char of valueString) {
+            if (!isNaN(parseInt(char))) {
+              const digitRoller = document.createElement('div');
+              digitRoller.className = 'digit-roller';
+              let innerHTML = '';
+              for (let i = 0; i <= 9; i++) {
+                innerHTML += `<span>${i}</span>`;
+              }
+              digitRoller.innerHTML = innerHTML;
+              counterContainer.appendChild(digitRoller);
+            } else {
+              const separator = document.createElement('div');
+              separator.className = 'digit-separator';
+              separator.textContent = char;
+              counterContainer.appendChild(separator);
+            }
+          }
+        };
+
+        const scrollToFinalValue = (valueString) => {
+          const digitRollers = counterContainer.querySelectorAll('.digit-roller');
+
+          const digitHeight = 30;
+
+          let rollerIndex = 0;
+          for (let char of valueString) {
+            if (!isNaN(parseInt(char))) {
+              const digit = parseInt(char);
+              const roller = digitRollers[rollerIndex];
+              if (roller) {
+                // roller.style.transitionDelay = `${rollerIndex * 0.1}s`;
+                roller.style.transform = `translateY(-${digit * digitHeight}px)`;
+              }
+              rollerIndex++;
+            }
+          }
+        };
+
+        createCounter(finalValueString);
+
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                scrollToFinalValue(finalValueString);
+              }, 100);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.8 });
+
+        observer.observe(counterWidget);
+      }
+
+      const registrationModal = new bootstrap.Modal(document.getElementById('modalForm'));
+
+      const buttonIdsToOpenModal = [
+        'fixed-register-button',
+        'fixed-mobile-cta',
+        'BUTTON11', 'BUTTON20', 'BUTTON21', 'BUTTON22', 'BUTTON23', 'BUTTON24'
+      ];
+
+      buttonIdsToOpenModal.forEach(id => {
+        const button = document.getElementById(id);
+        if (button) {
+          button.addEventListener('click', function(event) {
+            event.preventDefault();
+            registrationModal.show();
+          });
+        }
+      });
+
+      const backSideButtons = document.querySelectorAll('.back-button-wrapper');
+      backSideButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+          event.preventDefault();
+          registrationModal.show();
+        });
+      });
+
+    });
+  </script>
 </body>
 
 </html>
