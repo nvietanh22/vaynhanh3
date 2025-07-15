@@ -1118,10 +1118,7 @@ $(document).ready(function () {
       const wheelImage = document.getElementById('wheel-main-image'); // Đảm bảo wheelImage được truy cập
       const totalSegments = 10;
       const segmentAngle = 360 / totalSegments;
-
-      // 1. Lấy index từ tham số đầu vào
       const winningSegmentIndex = prizeToLandOn.index;
-
       const randomSpins = Math.floor(Math.random() * 4) + 5;
       const prizeAngle = winningSegmentIndex * segmentAngle;
       const arrowOffset = -90;
@@ -1129,11 +1126,8 @@ $(document).ready(function () {
       const angleJitter = (Math.random() - 0.5) * (segmentAngle * 0.8);
       const totalRotation = (randomSpins * 360) - prizeAngle - middleOfSegmentOffset + arrowOffset + angleJitter;
 
-      // 2. Thực hiện hiệu ứng
       wheelImage.style.transition = 'transform 5s cubic-bezier(0.25, 1, 0.5, 1)';
       wheelImage.style.transform = `rotate(${totalRotation}deg)`;
-
-      // 3. Gắn sự kiện để xử lý sau khi quay xong
       wheelImage.addEventListener('transitionend', () => {
         $('#btn-spin-wheel').data('isSpinning', false);
         luckyWheelUI.setLoading(false);
