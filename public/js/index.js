@@ -913,7 +913,7 @@ const luckyWheelValidation = {
       else if (!lib.validatePhoneNumber(phone)) messages.push("Số điện thoại không đúng định dạng.");
     }
     if (fields.network) {
-      if (!network) messages.push("Vui lòng chọn nhà mạng.");
+      if (!network) messages.push("Chọn nhà mạng là bắt buộc.");
     }
     if (fields.otp) {
       if (!otp) messages.push("Mã OTP là bắt buộc.");
@@ -958,10 +958,10 @@ $(document).ready(function () {
     availablePrices = [];
     if (!selectedBrand) return;
 
-    luckyWheelUI.setLoading(true);
+    // luckyWheelUI.setLoading(true);
     luckyWheelApi.getPriceList(selectedBrand, {
       complete: function(response) {
-        luckyWheelUI.setLoading(false);
+        // luckyWheelUI.setLoading(false);
         const data = response.responseJSON;
         if (data && data.Data && Array.isArray(data.Data) && data.Data.length > 0) {
           availablePrices = data.Data;
@@ -970,7 +970,7 @@ $(document).ready(function () {
         }
       },
       error: function() {
-        luckyWheelUI.setLoading(false);
+        // luckyWheelUI.setLoading(false);
         showNotiDefault('error', 'Lỗi', 'Không thể kiểm tra kho thẻ. Vui lòng thử lại.');
       }
     });
@@ -982,7 +982,7 @@ $(document).ready(function () {
       return showNotiDefault('error', 'Thông tin chưa đầy đủ', validation.msg);
     }
 
-    luckyWheelUI.setLoading(true);
+    // luckyWheelUI.setLoading(true);
     const phone = $('#lucky-wheel-phone').val();
     luckyWheelApi.verifyPhone(phone, {
       complete: function(response) {
@@ -992,7 +992,7 @@ $(document).ready(function () {
           const transId = data.request_id || uuidv4();
           luckyWheelApi.generateOtp(phone, transId, {
             complete: function(otpResponse) {
-              luckyWheelUI.setLoading(false);
+              // luckyWheelUI.setLoading(false);
               const otpData = otpResponse.responseJSON;
               if (otpData.data?.result?.status === true) {
                 luckyWheelTransId = otpData.transId;
@@ -1003,17 +1003,17 @@ $(document).ready(function () {
               }
             },
             error: function(otpError) {
-              luckyWheelUI.setLoading(false);
+              // luckyWheelUI.setLoading(false);
               showNotiDefault('error', 'Lỗi', 'Không thể tạo mã OTP, vui lòng thử lại.');
             }
           });
         } else {
-          luckyWheelUI.setLoading(false);
+          // luckyWheelUI.setLoading(false);
           showNotiDefault('error', 'Lỗi', data.rslt_msg || 'Xác thực không thành công.');
         }
       },
       error: function(error) {
-        luckyWheelUI.setLoading(false);
+        // luckyWheelUI.setLoading(false);
         const errorMsg = error.responseJSON?.message || 'Có lỗi xảy ra.';
         showNotiDefault('error', 'Thông báo', errorMsg);
       }
@@ -1023,22 +1023,22 @@ $(document).ready(function () {
     const validation = luckyWheelValidation.validateForm({ otp: true });
     if (!validation.valid) return showNotiDefault('error', 'OTP không hợp lệ', validation.msg);
 
-    luckyWheelUI.setLoading(true);
+    // luckyWheelUI.setLoading(true);
     const phone = $('#lucky-wheel-phone').val();
     const otp = $('#lucky-wheel-otp').val();
 
     luckyWheelApi.verifyOtp(phone, otp, luckyWheelTransId, {
       complete: function(response) {
-        luckyWheelUI.setLoading(false);
+        // luckyWheelUI.setLoading(false);
         const data = response.responseJSON;
         if (data.data?.result?.authentication === 'ACCEPT') {
-          // showNotiDefault('success', 'Thành công', 'Xác thực thành công! Vui lòng bấm "Gửi thông tin" để quay thưởng.');
+          showNotiDefault('success', 'Thành công', 'Xác thực thành công! Vui lòng bấm "Gửi thông tin" để quay thưởng.');
         } else {
           showNotiDefault('error', 'Xác thực thất bại', data.errorMessage || 'Mã OTP không chính xác.');
         }
       },
       error: function() {
-        luckyWheelUI.setLoading(false);
+        // luckyWheelUI.setLoading(false);
         showNotiDefault('error', 'Xác thực thất bại', 'Có lỗi xảy ra, vui lòng thử lại.');
       }
     });
