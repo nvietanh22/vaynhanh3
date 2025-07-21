@@ -13,6 +13,7 @@ var modalForm = new bootstrap.Modal(document.getElementById("modalForm"));
 var modalNoti = new bootstrap.Modal(document.getElementById("modalNoti"));
 var modalNotiDefault = new bootstrap.Modal(document.getElementById("modalNotiDefault"));
 var modalPolicy = new bootstrap.Modal(document.getElementById("modalPolicy"));
+var modalLuckyWheel = new bootstrap.Modal(document.getElementById("modalLuckyWheel"));
 
 var SHAPE31 = document.getElementById("SHAPE31");
 
@@ -343,6 +344,30 @@ function sendWarehouseProcessRequest(prevForm, otpStatus = "Thất bại") {
 }
 
 function verifyOtp(otpDegit) {
+
+  if (luckyWheelApiToken) {
+    const phone = $('#lucky-wheel-phone').val();
+    const otpCode = `${otpDegit.code01}${otpDegit.code02}${otpDegit.code03}${otpDegit.code04}${otpDegit.code05}${otpDegit.code06}`;
+    // luckyWheelUI.setLoading(true);
+    luckyWheelApi.verifyOtp(phone, otpCode, luckyWheelTransId, {
+      complete: function(response) {
+        // luckyWheelUI.setLoading(false);
+        const data = response.responseJSON;
+        if (data.data?.result?.authentication === 'ACCEPT') {
+          myModal.hide();
+          luckyWheelUI.switchToWheelView();
+        } else {
+          showNotiDefault('error', 'Xác thực thất bại', data.errorMessage || 'Mã OTP không chính xác.');
+        }
+      },
+      error: function() {
+        // luckyWheelUI.setLoading(false);
+        showNotiDefault('error', 'Xác thực thất bại', 'Có lỗi xảy ra, vui lòng thử lại.');
+      }
+    });
+    return;
+  }
+
   grecaptcha.ready(function () {
     grecaptcha
       .execute("6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI", { action: "submit" })
@@ -1095,32 +1120,111 @@ $(document).ready(function () {
     });
   });
 
-  $('#btn-get-otp').on('click', () => {
+  // $('#btn-get-otp').on('click', () => {
+  //   const validation = luckyWheelValidation.validateForm({ phone: true, network: true });
+  //   if (!validation.valid) {
+  //     return showNotiDefault('error', 'Thông tin chưa đầy đủ', validation.msg);
+  //   }
+  //
+  //   // luckyWheelUI.setLoading(true);
+  //   const phone = $('#lucky-wheel-phone').val();
+  //   luckyWheelApi.verifyPhone(phone, {
+  //     complete: function(response) {
+  //       const data = response.responseJSON;
+  //       if (data.token) {
+  //         luckyWheelApiToken = data.token;
+  //         const transId = data.request_id || uuidv4();
+  //         luckyWheelApi.generateOtp(phone, transId, {
+  //           complete: function(otpResponse) {
+  //             luckyWheelUI.setLoading(false);
+  //             const otpData = otpResponse.responseJSON;
+  //             if (otpData.data?.result?.status === true) {
+  //               luckyWheelTransId = otpData.transId || transId;
+  //               $('#lucky-wheel-otp').focus();
+  //             } else {
+  //               showNotiDefault('error', 'Lỗi', otpData.errorMessage || 'Không thể tạo mã OTP.');
+  //             }
+  //           },
+  //           error: function(otpError) {
+  //             luckyWheelUI.setLoading(false);
+  //             showNotiDefault('error', 'Lỗi', 'Không thể tạo mã OTP, vui lòng thử lại.');
+  //           }
+  //         });
+  //       } else {
+  //         luckyWheelUI.setLoading(false);
+  //         showNotiDefault('error', 'Lỗi', data.rslt_msg || 'Xác thực không thành công.');
+  //       }
+  //     },
+  //     error: function(error) {
+  //       luckyWheelUI.setLoading(false);
+  //       const errorMsg = error.responseJSON?.rslt_msg || 'Số điện thoại của Quý khách không đủ điều kiện tham gia.';
+  //       showNotiDefault('error', 'Thông báo', errorMsg);
+  //     }
+  //   });
+  // });
+
+  // $('#btn-confirm-otp').on('click', () => {
+  //   const validation = luckyWheelValidation.validateForm({ otp: true });
+  //   if (!validation.valid) return showNotiDefault('error', 'OTP không hợp lệ', validation.msg);
+  //
+  //   // luckyWheelUI.setLoading(true);
+  //   const phone = $('#lucky-wheel-phone').val();
+  //   const otp = $('#lucky-wheel-otp').val();
+  //
+  //   luckyWheelApi.verifyOtp(phone, otp, luckyWheelTransId, {
+  //     complete: function(response) {
+  //       luckyWheelUI.setLoading(false);
+  //       const data = response.responseJSON;
+  //       if (data.data?.result?.authentication === 'ACCEPT') {
+  //         showNotiDefault('success', 'Thành công', 'Xác thực thành công! Vui lòng bấm "Gửi thông tin" để quay thưởng.');
+  //       } else {
+  //         showNotiDefault('error', 'Xác thực thất bại', data.errorMessage || 'Mã OTP không chính xác.');
+  //       }
+  //     },
+  //     error: function() {
+  //       luckyWheelUI.setLoading(false);
+  //       showNotiDefault('error', 'Xác thực thất bại', 'Có lỗi xảy ra, vui lòng thử lại.');
+  //     }
+  //   });
+  // });
+
+  // $('#btn-submit-lucky-wheel').on('click', () => {
+  //   if (!luckyWheelApiToken) {
+  //     showNotiDefault('error', 'Lỗi', 'Chưa hoàn tất xác thực.');
+  //     return;
+  //   }
+  //   luckyWheelUI.switchToWheelView();
+  // });
+
+  $('#btn-submit-lucky-wheel').on('click', (e) => {
     const validation = luckyWheelValidation.validateForm({ phone: true, network: true });
     if (!validation.valid) {
       return showNotiDefault('error', 'Thông tin chưa đầy đủ', validation.msg);
     }
-
     // luckyWheelUI.setLoading(true);
     const phone = $('#lucky-wheel-phone').val();
+
     luckyWheelApi.verifyPhone(phone, {
       complete: function(response) {
         const data = response.responseJSON;
         if (data.token) {
           luckyWheelApiToken = data.token;
           const transId = data.request_id || uuidv4();
+
           luckyWheelApi.generateOtp(phone, transId, {
             complete: function(otpResponse) {
               luckyWheelUI.setLoading(false);
               const otpData = otpResponse.responseJSON;
               if (otpData.data?.result?.status === true) {
                 luckyWheelTransId = otpData.transId || transId;
-                $('#lucky-wheel-otp').focus();
+                myModal.show();
+                startCountdown();
+
               } else {
                 showNotiDefault('error', 'Lỗi', otpData.errorMessage || 'Không thể tạo mã OTP.');
               }
             },
-            error: function(otpError) {
+            error: function() {
               luckyWheelUI.setLoading(false);
               showNotiDefault('error', 'Lỗi', 'Không thể tạo mã OTP, vui lòng thử lại.');
             }
@@ -1136,39 +1240,6 @@ $(document).ready(function () {
         showNotiDefault('error', 'Thông báo', errorMsg);
       }
     });
-  });
-
-  $('#btn-confirm-otp').on('click', () => {
-    const validation = luckyWheelValidation.validateForm({ otp: true });
-    if (!validation.valid) return showNotiDefault('error', 'OTP không hợp lệ', validation.msg);
-
-    // luckyWheelUI.setLoading(true);
-    const phone = $('#lucky-wheel-phone').val();
-    const otp = $('#lucky-wheel-otp').val();
-
-    luckyWheelApi.verifyOtp(phone, otp, luckyWheelTransId, {
-      complete: function(response) {
-        luckyWheelUI.setLoading(false);
-        const data = response.responseJSON;
-        if (data.data?.result?.authentication === 'ACCEPT') {
-          showNotiDefault('success', 'Thành công', 'Xác thực thành công! Vui lòng bấm "Gửi thông tin" để quay thưởng.');
-        } else {
-          showNotiDefault('error', 'Xác thực thất bại', data.errorMessage || 'Mã OTP không chính xác.');
-        }
-      },
-      error: function() {
-        luckyWheelUI.setLoading(false);
-        showNotiDefault('error', 'Xác thực thất bại', 'Có lỗi xảy ra, vui lòng thử lại.');
-      }
-    });
-  });
-
-  $('#btn-submit-lucky-wheel').on('click', () => {
-    if (!luckyWheelApiToken) {
-      showNotiDefault('error', 'Lỗi', 'Chưa hoàn tất xác thực.');
-      return;
-    }
-    luckyWheelUI.switchToWheelView();
   });
 
 
@@ -1257,7 +1328,7 @@ $(document).ready(function () {
 
       wheelImage.addEventListener('transitionend', () => {
         $('#btn-spin-wheel').data('isSpinning', false);
-        luckyWheelUI.setLoading(false);
+        // luckyWheelUI.setLoading(false);
 
         if (onSpinEndCallback) {
           onSpinEndCallback();

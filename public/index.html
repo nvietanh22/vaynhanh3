@@ -9505,26 +9505,15 @@
       <div class="modal-content" id="lucky-wheel-content">
         <!--      <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>-->
         <div class="lucky-wheel-header">
-<!--          <img src="./ladi/Layer_3.png" class="lucky-wheel-deco-left" alt="decoration">-->
-<!--          <img src="./ladi/Layer_3_right.png" class="lucky-wheel-deco-right" alt="decoration">-->
+          <img src="./ladi/Layer_3.png" class="lucky-wheel-deco-left" alt="decoration">
+          <img src="./ladi/Layer_3_right.png" class="lucky-wheel-deco-right" alt="decoration">
           <h2 class="lucky-wheel-title">TÀI CHÍNH MAY MẮN</h2>
         </div>
         <div class="lucky-wheel-form-body">
           <div class="form-group">
             <p class="lucky-wheel-instruction">Vui lòng nhập số điện thoại tại đây để nhận lượt quay:</p>
-            <div class="lucky-wheel-input-group">
-              <input type="tel" id="lucky-wheel-phone" placeholder="Số điện thoại" class="lucky-wheel-input" required>
-              <button type="button" id="btn-get-otp" class="btn-get-otp">Nhận OTP</button>
-            </div>
+            <input type="tel" id="lucky-wheel-phone" placeholder="Số điện thoại" class="lucky-wheel-input" required>
           </div>
-
-          <div class="form-group">
-            <div class="lucky-wheel-input-group">
-              <input type="text" id="lucky-wheel-otp" placeholder="Nhập OTP" class="lucky-wheel-input">
-              <button type="button" id="btn-confirm-otp" class="btn-confirm-otp">Xác nhận</button>
-            </div>
-          </div>
-
           <div class="form-group">
             <p class="lucky-wheel-instruction">Vui lòng chọn nhà mạng của bạn tại đây:</p>
             <select id="lucky-wheel-network" class="lucky-wheel-select" required>
@@ -9537,7 +9526,8 @@
             </select>
           </div>
 
-          <button type="submit" id="btn-submit-lucky-wheel" class="btn-submit-info">Gửi thông tin</button>
+          <!-- Nút Gửi thông tin -->
+          <button type="button" id="btn-submit-lucky-wheel" class="btn-submit-info">Gửi thông tin</button>
         </div>
 
         <div class="lucky-wheel-game-body" style="display: none;">
@@ -9557,8 +9547,8 @@
             </div>
             <img src="./ladi/Wheel-arrow.png" alt="Mũi tên" class="wheel-arrow">
             <img src="./ladi/spin-button.png" alt="Quay" id="btn-spin-wheel" class="wheel-spin-button">
-<!--            <img src="./ladi/coin-right.png" alt="coins" class="wheel-coin-right">-->
-<!--            <img src="./ladi/coin-left.png" alt="coins" class="wheel-coin-left">-->
+            <img src="./ladi/coin-right.png" alt="coins" class="wheel-coin-right">
+            <img src="./ladi/coin-left.png" alt="coins" class="wheel-coin-left">
           </div>
         </div>
       </div>
@@ -11154,10 +11144,11 @@
       background-clip: text;
       text-fill-color: transparent;
       margin: 0;
+      /*top: 20px;*/
     }
 
     #lucky-wheel-content .lucky-wheel-form-body {
-      position: relative; /* Thêm dòng này để z-index hoạt động */
+      position: relative;
       z-index: 2;
       width: 386px;
       height: 475px;
@@ -11242,27 +11233,27 @@
       background-size: 20px;
     }
 
-    .btn-get-otp,
-    .btn-confirm-otp {
-      height: 44px;
-      padding: 0 15px;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      /*font-weight: 600;*/
-      font-size: 18px;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: background-color 0.3s;
-      min-width: 110px;
-    }
+    /*.btn-get-otp,*/
+    /*.btn-confirm-otp {*/
+    /*  height: 44px;*/
+    /*  padding: 0 15px;*/
+    /*  border: none;*/
+    /*  border-radius: 6px;*/
+    /*  color: white;*/
+    /*  !*font-weight: 600;*!*/
+    /*  font-size: 18px;*/
+    /*  cursor: pointer;*/
+    /*  flex-shrink: 0;*/
+    /*  transition: background-color 0.3s;*/
+    /*  min-width: 110px;*/
+    /*}*/
 
-    .btn-get-otp {
-      background-color: #2F6BFF;
-    }
-    .btn-confirm-otp {
-      background-color: #E7252B;
-    }
+    /*.btn-get-otp {*/
+    /*  background-color: #2F6BFF;*/
+    /*}*/
+    /*.btn-confirm-otp {*/
+    /*  background-color: #E7252B;*/
+    /*}*/
 
     #btn-submit-lucky-wheel {
       font-family: 'SF Pro Display';
@@ -11347,7 +11338,7 @@
 
     #lucky-wheel-content .wheel-image {
       width: 100%;
-      height: 100%;
+      /*height: 100%;*/
       padding-right: 15px;
       transition: transform 5s cubic-bezier(0.25, 1, 0.5, 1);
     }
@@ -11432,54 +11423,49 @@
     /*giá trị động*/
 
     .wheel-container {
-      position: relative; /* Bắt buộc để định vị các phần tử con bên trong */
-      /* Kích thước này phải khớp với kích thước của ảnh wheel_clean.png trên màn hình desktop */
+      position: relative;
       width: 475px;
       height: 475px;
-      margin: 0 auto; /* Tự động căn giữa */
+      margin: 0 auto;
     }
 
-    /* 2. Lớp bọc tất cả các nhãn, lớp này sẽ được xoay bằng JS */
+
     .wheel-label-container {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      pointer-events: none; /* Cho phép click xuyên qua các nhãn để nhấn nút "Quay" */
-      transition: transform 5s cubic-bezier(0.25, 1, 0.5, 1); /* Hiệu ứng quay */
+      pointer-events: none;
+      transition: transform 5s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
-    /* 3. "Cánh tay" vô hình, dùng để xoay từng nhãn từ tâm vòng quay */
     .label-arm {
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      transform-origin: center center; /* Đảm bảo mọi "cánh tay" đều xoay quanh tâm */
+      transform-origin: center center;
     }
 
-    /* 4. Style cho từng nhãn chữ */
+
     .wheel-label {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 100px;           /* thu nhỏ từ 150px → 100px */
-      height: 30px;           /* thu nhỏ từ 40px → 30px */
-      margin-top: -15px;      /* = -height/2 */
+      width: 100px;
+      height: 30px;
+      margin-top: -15px;
       transform: translate(45px, -2px);
-      /* đẩy nhãn vào sâu hơn, căn chỉnh thêm trục Y */
       display: flex;
       align-items: center;
       justify-content: center;
-      white-space: nowrap;    /* tránh xuống dòng */
+      white-space: nowrap;
       font-family: 'SF Pro Display';
-      font-size: 12px;        /* giảm từ 20px → 16px */
+      font-size: 12px;
       font-weight: bolder;
       color: white;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
       text-transform: uppercase;
     }
 
-    /* 5. Xoay từng "cánh tay" đến đúng vị trí của ô tương ứng */
-    /* Công thức: Góc = (index * 36) + (36/2) */
-    /* 36 độ là góc của mỗi ô (360/10). 18 độ là nửa ô để đưa chữ vào giữa. */
+
     #arm-0 { transform: rotate(109deg); }
     #arm-1 { transform: rotate(145deg); }
     #arm-2 { transform: rotate(181deg); }
@@ -11491,50 +11477,67 @@
     #arm-8 { transform: rotate(397deg); }
     #arm-9 { transform: rotate(433deg); }
 
-    /* Responsive cho màn hình mobile */
-    @media (max-width: 767px) {
-      .wheel-container {
-        width: 300px; /* Kích thước nhỏ hơn cho mobile */
-        height: 300px;
-      }
-      .wheel-label {
-        font-size: 14px;
-        width: 100px;
-        transform: translate(95px); /* Điều chỉnh lại khoảng cách cho kích thước mobile */
-      }
-    }
 
     /* Responsive cho vòng quay trên mobile */
     @media (max-width: 767px) {
+      #modalLuckyWheel .modal-dialog {
+        max-width: 360px !important;
+        width: 90vw !important;
+      }
+      #lucky-wheel-content {
+        width: 100% !important;
+        height: auto !important;
+        padding: 20px 15px !important;
+      }
+
+      #lucky-wheel-content .lucky-wheel-game-body {
+        margin-top: 20px !important;
+      }
+
       #lucky-wheel-content .wheel-container {
-        width: 300px;
-        height: 300px;
+        width: 270px !important;
+        height: 270px !important;
+        margin-top: 20px;
       }
-
       #lucky-wheel-content .wheel-arrow {
-        width: 70px;
-        height: 70px;
-        right: -15px;
+        width: 80px !important;
+        height: auto !important;
+        right: -15px !important;
       }
-
       #lucky-wheel-content .wheel-spin-button {
-        width: 65px;
-        height: 65px;
-        font-size: 18px;
-        border-width: 4px;
+        width: 51px !important;
+        height: 51px !important;
+        left: 49%;
       }
-
       #lucky-wheel-content .wheel-coin-right {
-        width: 100px;
-        top: -5px;
-        right: -5px;
+        width: 100px !important;
+        top: -5px !important;
+        right: 0px !important;
+      }
+      #lucky-wheel-content .wheel-coin-left {
+        width: 90px !important;
+        bottom: -5px !important;
+        left: 5px !important;
       }
 
-      #lucky-wheel-content .wheel-coin-left {
-        width: 90px;
-        bottom: -5px;
-        left: 10px;
+      .wheel-label {
+        width: 90px !important;
+        transform: translate(7px) !important;
+        font-size: 7px !important;
       }
+      #lucky-wheel-content .wheel-label span[style*="font-size: 30px"] {
+        font-size: 20px !important;
+      }
+      #arm-0 { transform: rotate(109deg); }
+      #arm-1 { transform: rotate(145deg); }
+      #arm-2 { transform: rotate(181deg); }
+      #arm-3 { transform: rotate(216deg); }
+      #arm-4 { transform: rotate(251deg); }
+      #arm-5 { transform: rotate(287deg); }
+      #arm-6 { transform: rotate(324deg); }
+      #arm-7 { transform: rotate(361deg); }
+      #arm-8 { transform: rotate(398deg); }
+      #arm-9 { transform: rotate(434deg); }
     }
 
     /*result popup*/
@@ -11752,7 +11755,6 @@
       }
     }
 
-    /* Ẩn trên màn hình mobile */
     @media (max-width: 767px) {
       #custom-partner-logo-wrapper {
         display: none !important;
@@ -11780,8 +11782,8 @@
 
     /* Cột chứa text */
     .insurance-text-group {
-      text-align: left; /* Căn lề trái cho toàn bộ text */
-      max-width: 340.66px; /* Giới hạn chiều rộng của cột text */
+      text-align: left;
+      max-width: 340.66px;
       max-height: 204px;
       row-gap: 4px;
     }
@@ -11818,9 +11820,9 @@
 
     /* Định dạng cho logo duy nhất */
     .insurance-partner-single-logo {
-      width: auto; /* Điều chỉnh kích thước logo cho phù hợp */
+      width: auto;
       height: auto;
-      flex-shrink: 0; /* Không cho logo bị co lại */
+      flex-shrink: 0;
     }
 
     /* Responsive cho Mobile */
@@ -11840,13 +11842,23 @@
         max-width: 100%;
       }
       .insurance-partner-single-logo {
-        width: 180px; /* Kích thước logo trên mobile */
+        width: 180px;
       }
       .insurance-partner-title {
         font-size: 24px;
       }
     }
 
+
+    #modalLuckyWheel {
+      z-index: 1050 !important;
+    }
+    #myModal {
+      z-index: 1060 !important;
+    }
+    /*.modal-backdrop.show:last-of-type {*/
+    /*  z-index: 1059 !important;*/
+    /*}*/
 
   </style>
   <script>
@@ -11870,149 +11882,6 @@
           }
         });
       }
-
-      // const btnSubmit = document.getElementById('btn-submit-lucky-wheel');
-      // const formBody = document.querySelector('#lucky-wheel-content .lucky-wheel-form-body');
-      // const gameBody = document.querySelector('#lucky-wheel-content .lucky-wheel-game-body');
-      // if (btnSubmit && formBody && gameBody) {
-      //   btnSubmit.addEventListener('click', function(event) {
-      //     event.preventDefault();
-      //     formBody.classList.add('view-hidden');
-      //     gameBody.style.display = 'flex';
-      //     setTimeout(() => {
-      //       gameBody.classList.add('view-visible');
-      //     }, 10);
-      //   });
-      // }
-      //
-      // // Xử lý hiệu ứng quay vòng quay
-      // const btnSpin = document.getElementById('btn-spin-wheel');
-      // const wheelImage = document.getElementById('wheel-main-image');
-      // const resultPopup = document.getElementById('result-popup');
-      // const resultPopupCloseBtn = document.getElementById('result-popup-close');
-      // const luckyWheelModalInstance = bootstrap.Modal.getInstance(document.getElementById('modalLuckyWheel')) || new bootstrap.Modal(document.getElementById('modalLuckyWheel'));
-      //
-      // const prizes = [
-      //   "MAY MẮN LẦN SAU",
-      //   "10K",
-      //   "50K",
-      //   "20K",
-      //   "50K",
-      //   "MAY MẮN LẦN SAU",
-      //   "10K",
-      //   "50K",
-      //   "20K",
-      //   "50K",
-      // ];
-      // const segmentAngle = 360 / prizes.length;
-      //
-      // let isSpinning = false;
-      // let currentRotation = 0;
-      // function updateAndShowPopup(prizeValue) {
-      //   const resultTitle = resultPopup.querySelector('.result-title');
-      //   const resultSubtext = resultPopup.querySelector('.result-subtext');
-      //   const resultAmount = resultPopup.querySelector('.result-amount');
-      //   const resultCode = resultPopup.querySelector('.result-code');
-      //   const resultNote = resultPopup.querySelector('.result-note');
-      //   const shareLinks = resultPopup.querySelector('.result-share-links');
-      //   const partyPopper = '<img src="./ladi/Party-Popper.png" alt="party popper" class="party-popper-icon">';
-      //
-      //   if (prizeValue === "MAY MẮN LẦN SAU") {
-      //     resultTitle.innerHTML = "CHÚC BẠN MAY MẮN LẦN SAU!";
-      //     resultSubtext.textContent = "Cảm ơn bạn đã tham gia chương trình của LOTTE Finance.";
-      //     resultAmount.style.display = 'none';
-      //     resultCode.style.display = 'none';
-      //     resultNote.style.display = 'none';
-      //     shareLinks.style.display = 'none';
-      //   } else {
-      //     const formattedAmount = parseInt(prizeValue.replace('K', '')) + ',000 VND';
-      //
-      //     resultTitle.innerHTML = `XIN CHÚC MỪNG! ${partyPopper}`;
-      //     resultSubtext.textContent = "Bạn đã nhận được một thẻ điện thoại";
-      //     resultAmount.textContent = formattedAmount;
-      //     resultCode.textContent = "Mã thẻ: XXXX XXXX XXXX";
-      //     resultAmount.style.display = 'block';
-      //     resultCode.style.display = 'block';
-      //     resultNote.style.display = 'block';
-      //     shareLinks.style.display = 'flex';
-      //   }
-      //   resultPopup.classList.add('visible');
-      // }
-      //
-      // if (btnSpin && wheelImage && resultPopup && resultPopupCloseBtn) {
-      //   const prizes = [
-      //     "MAY MẮN LẦN SAU",
-      //     "10K",
-      //     "50K",
-      //     "20K",
-      //     "50K",
-      //     "MAY MẮN LẦN SAU",
-      //     "10K",
-      //     "50K",
-      //     "20K",
-      //     "50K",];
-      //   const segmentAngle = 360 / prizes.length;
-      //   let isSpinning = false;
-      //   function updateAndShowPopup(prizeValue) {
-      //     const resultTitle = resultPopup.querySelector('.result-title');
-      //     const resultSubtext = resultPopup.querySelector('.result-subtext');
-      //     const resultAmount = resultPopup.querySelector('.result-amount');
-      //     const resultCode = resultPopup.querySelector('.result-code');
-      //     const resultNote = resultPopup.querySelector('.result-note');
-      //     const shareLinks = resultPopup.querySelector('.result-share-links');
-      //     const partyPopper = '<img src="./ladi/Party-Popper.png" alt="party popper" class="party-popper-icon">';
-      //
-      //     if (prizeValue === "MAY MẮN LẦN SAU") {
-      //       resultTitle.innerHTML = "CHÚC BẠN MAY MẮN LẦN SAU!";
-      //       resultSubtext.textContent = "Cảm ơn bạn đã tham gia chương trình của LOTTE Finance.";
-      //       resultAmount.style.display = 'none';
-      //       resultCode.style.display = 'none';
-      //       resultNote.style.display = 'none';
-      //       shareLinks.style.display = 'none';
-      //     } else {
-      //       const formattedAmount = parseInt(prizeValue.replace('K', '')) + ',000 VND';
-      //       resultTitle.innerHTML = `XIN CHÚC MỪNG! ${partyPopper}`;
-      //       resultSubtext.textContent = "Bạn đã nhận được một thẻ điện thoại";
-      //       resultAmount.textContent = formattedAmount;
-      //       resultCode.textContent = "Mã thẻ: XXXX XXXX XXXX";
-      //       resultAmount.style.display = 'block';
-      //       resultCode.style.display = 'block';
-      //       resultNote.style.display = 'block';
-      //       shareLinks.style.display = 'flex';
-      //     }
-      //     resultPopup.classList.add('visible');
-      //   }
-      //   btnSpin.addEventListener('click', function() {
-      //     if (isSpinning) return;
-      //     isSpinning = true;
-      //     const winningIndex = Math.floor(Math.random() * prizes.length);
-      //     // const winningIndex = 0;
-      //     const winningPrize = prizes[winningIndex];
-      //     const randomSpins = Math.floor(Math.random() * 4) + 5;
-      //     const prizeAngle = winningIndex * segmentAngle;
-      //     const arrowOffset = -90;
-      //     const middleOfSegmentOffset = segmentAngle / 2;
-      //     const angleJitter = (Math.random() - 0.5) * (segmentAngle * 0.4);
-      //     const totalRotation = (randomSpins * 360) - prizeAngle - middleOfSegmentOffset + arrowOffset + angleJitter;
-      //     wheelImage.style.transform = `rotate(${totalRotation}deg)`;
-      //     wheelImage.addEventListener('transitionend', () => {
-      //       isSpinning = false;
-      //       updateAndShowPopup(winningPrize);
-      //     }, { once: true });
-      //     console.log("Index trúng:", winningIndex, "Prize:", winningPrize);
-      //   });
-      //   const closeAllPopups = () => {
-      //     luckyWheelModalInstance.hide();
-      //     resultPopup.classList.remove('visible');
-      //   };
-      //   resultPopupCloseBtn.addEventListener('click', closeAllPopups);
-      //   resultPopup.addEventListener('click', function(event) {
-      //     if (event.target === this) {
-      //       closeAllPopups();
-      //     }
-      //   });
-      // }
-
     });
   </script>
 
