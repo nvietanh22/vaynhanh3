@@ -344,30 +344,6 @@ function sendWarehouseProcessRequest(prevForm, otpStatus = "Thất bại") {
 }
 
 function verifyOtp(otpDegit) {
-
-  if (luckyWheelApiToken) {
-    const phone = $('#lucky-wheel-phone').val();
-    const otpCode = `${otpDegit.code01}${otpDegit.code02}${otpDegit.code03}${otpDegit.code04}${otpDegit.code05}${otpDegit.code06}`;
-    // luckyWheelUI.setLoading(true);
-    luckyWheelApi.verifyOtp(phone, otpCode, luckyWheelTransId, {
-      complete: function(response) {
-        // luckyWheelUI.setLoading(false);
-        const data = response.responseJSON;
-        if (data.data?.result?.authentication === 'ACCEPT') {
-          myModal.hide();
-          luckyWheelUI.switchToWheelView();
-        } else {
-          showNotiDefault('error', 'Xác thực thất bại', data.errorMessage || 'Mã OTP không chính xác.');
-        }
-      },
-      error: function() {
-        // luckyWheelUI.setLoading(false);
-        showNotiDefault('error', 'Xác thực thất bại', 'Có lỗi xảy ra, vui lòng thử lại.');
-      }
-    });
-    return;
-  }
-
   grecaptcha.ready(function () {
     grecaptcha
       .execute("6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI", { action: "submit" })
@@ -640,7 +616,11 @@ $('.otp-input').on('input', function () {
       code05: code05,
       code06: code06
     }
-    verifyOtp(otpDegit);
+    if (luckyWheelApiToken) {
+      verifyLuckyWheelOtp(otpDegit);
+    } else {
+      verifyOtp(otpDegit);
+    }
   }
 });
 
@@ -1051,17 +1031,51 @@ const luckyWheelValidation = {
   }
 };
 
+function verifyLuckyWheelOtp(otpDegit) {
+  if (!luckyWheelApiToken) {
+    console.error("Lỗi: verifyLuckyWheelOtp được gọi nhưng không có token.");
+    return;
+  }
+
+  const phone = $('#lucky-wheel-phone').val();
+  const otpCode = `${otpDegit.code01}${otpDegit.code02}${otpDegit.code03}${otpDegit.code04}${otpDegit.code05}${otpDegit.code06}`;
+  const processAfterOtpModalHides = () => {
+    luckyWheelUI.setLoading(true);
+    luckyWheelApi.verifyOtp(phone, otpCode, luckyWheelTransId, {
+      complete: function(response) {
+        luckyWheelUI.setLoading(false);
+        const data = response.responseJSON;
+        if (data.data?.result?.authentication === 'ACCEPT') {
+          modalLuckyWheel.show();
+          luckyWheelUI.switchToWheelView();
+        } else {
+          showNotiDefault('error', 'Xác thực thất bại', data.errorMessage || 'Mã OTP không chính xác.');
+          modalLuckyWheel.show();
+        }
+      },
+      error: function() {
+        luckyWheelUI.setLoading(false);
+        showNotiDefault('error', 'Xác thực thất bại', 'Có lỗi xảy ra, vui lòng thử lại.');
+        modalLuckyWheel.show();
+      }
+    });
+  };
+  $('#myModal').one('hidden.bs.modal', processAfterOtpModalHides);
+  myModal.hide();
+}
+
+
 const luckyWheelApi = {
   verifyPhone: (phone, callbacks) => {
     const payload = { request_id: uuidv4(), contact_number: phone, national_id: "" };
     lib.post({ url: `${env.backEndApi}/api/mobile-cards/verify-phone`, data: JSON.stringify(payload), ...callbacks });
   },
   generateOtp: (phone, transId, callbacks) => {
-    const payload = { TransId: transId, Data: { phone, idCard: "", channel: "LOAN3" } };
+    const payload = { TransId: transId, Data: { phone, idCard: ""} };
     lib.post({ url: `${env.backEndApi}/api/otp/gen-otp`, data: JSON.stringify(payload), ...callbacks });
   },
   verifyOtp: (phone, otp, transId, callbacks) => {
-    const payload = { TransId: transId, Data: { phone, otp, channel: "LOAN3" } };
+    const payload = { TransId: transId, Data: { phone, otp} };
     lib.post({ url: `${env.backEndApi}/api/otp/verify-otp`, data: JSON.stringify(payload), ...callbacks });
   },
   getCard: (phone, brand, price, token, callbacks) => {
@@ -1073,7 +1087,8 @@ const luckyWheelApi = {
     });
   },
   getPriceList: (brand, callbacks) => {
-    const payload = { brand: brand.toUpperCase() };
+    const formattedBrand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
+    const payload = { brand: formattedBrand };
     lib.post({ url: `${env.backEndApi}/api/mobile-cards/get-price`, data: JSON.stringify(payload), ...callbacks });
   }
 };
@@ -1098,8 +1113,8 @@ $(document).ready(function () {
       complete: function(response) {
         luckyWheelUI.setLoading(false);
         const data = response.responseJSON;
-        if (data && data.Data && Array.isArray(data.Data)) {
-          availablePrices = data.Data;
+        if (data && data.rslt_cd === 's' && typeof data.prices !== 'undefined') {
+          availablePrices = data.prices ? data.prices.split(',').map(item => item.trim()) : [];
           const newLayout = distributePrizes(availablePrices);
           updateWheelDOM(newLayout);
           if (availablePrices.length === 0) {
@@ -1108,7 +1123,7 @@ $(document).ready(function () {
         } else {
           const newLayout = distributePrizes([]);
           updateWheelDOM(newLayout);
-          showNotiDefault('info', 'Thông báo', 'Nhà mạng này hiện đã hết thẻ. Vui lòng chọn nhà mạng khác.');
+          showNotiDefault('info', 'Thông báo', 'Không thể lấy thông tin thẻ cho nhà mạng này. Vui lòng chọn nhà mạng khác.');
         }
       },
       error: function() {
@@ -1119,82 +1134,6 @@ $(document).ready(function () {
       }
     });
   });
-
-  // $('#btn-get-otp').on('click', () => {
-  //   const validation = luckyWheelValidation.validateForm({ phone: true, network: true });
-  //   if (!validation.valid) {
-  //     return showNotiDefault('error', 'Thông tin chưa đầy đủ', validation.msg);
-  //   }
-  //
-  //   // luckyWheelUI.setLoading(true);
-  //   const phone = $('#lucky-wheel-phone').val();
-  //   luckyWheelApi.verifyPhone(phone, {
-  //     complete: function(response) {
-  //       const data = response.responseJSON;
-  //       if (data.token) {
-  //         luckyWheelApiToken = data.token;
-  //         const transId = data.request_id || uuidv4();
-  //         luckyWheelApi.generateOtp(phone, transId, {
-  //           complete: function(otpResponse) {
-  //             luckyWheelUI.setLoading(false);
-  //             const otpData = otpResponse.responseJSON;
-  //             if (otpData.data?.result?.status === true) {
-  //               luckyWheelTransId = otpData.transId || transId;
-  //               $('#lucky-wheel-otp').focus();
-  //             } else {
-  //               showNotiDefault('error', 'Lỗi', otpData.errorMessage || 'Không thể tạo mã OTP.');
-  //             }
-  //           },
-  //           error: function(otpError) {
-  //             luckyWheelUI.setLoading(false);
-  //             showNotiDefault('error', 'Lỗi', 'Không thể tạo mã OTP, vui lòng thử lại.');
-  //           }
-  //         });
-  //       } else {
-  //         luckyWheelUI.setLoading(false);
-  //         showNotiDefault('error', 'Lỗi', data.rslt_msg || 'Xác thực không thành công.');
-  //       }
-  //     },
-  //     error: function(error) {
-  //       luckyWheelUI.setLoading(false);
-  //       const errorMsg = error.responseJSON?.rslt_msg || 'Số điện thoại của Quý khách không đủ điều kiện tham gia.';
-  //       showNotiDefault('error', 'Thông báo', errorMsg);
-  //     }
-  //   });
-  // });
-
-  // $('#btn-confirm-otp').on('click', () => {
-  //   const validation = luckyWheelValidation.validateForm({ otp: true });
-  //   if (!validation.valid) return showNotiDefault('error', 'OTP không hợp lệ', validation.msg);
-  //
-  //   // luckyWheelUI.setLoading(true);
-  //   const phone = $('#lucky-wheel-phone').val();
-  //   const otp = $('#lucky-wheel-otp').val();
-  //
-  //   luckyWheelApi.verifyOtp(phone, otp, luckyWheelTransId, {
-  //     complete: function(response) {
-  //       luckyWheelUI.setLoading(false);
-  //       const data = response.responseJSON;
-  //       if (data.data?.result?.authentication === 'ACCEPT') {
-  //         showNotiDefault('success', 'Thành công', 'Xác thực thành công! Vui lòng bấm "Gửi thông tin" để quay thưởng.');
-  //       } else {
-  //         showNotiDefault('error', 'Xác thực thất bại', data.errorMessage || 'Mã OTP không chính xác.');
-  //       }
-  //     },
-  //     error: function() {
-  //       luckyWheelUI.setLoading(false);
-  //       showNotiDefault('error', 'Xác thực thất bại', 'Có lỗi xảy ra, vui lòng thử lại.');
-  //     }
-  //   });
-  // });
-
-  // $('#btn-submit-lucky-wheel').on('click', () => {
-  //   if (!luckyWheelApiToken) {
-  //     showNotiDefault('error', 'Lỗi', 'Chưa hoàn tất xác thực.');
-  //     return;
-  //   }
-  //   luckyWheelUI.switchToWheelView();
-  // });
 
   $('#btn-submit-lucky-wheel').on('click', (e) => {
     const validation = luckyWheelValidation.validateForm({ phone: true, network: true });
