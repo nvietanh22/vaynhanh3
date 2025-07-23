@@ -203,7 +203,7 @@ async function genOtp(prevForm) {
   hideBackpop();
   grecaptcha.ready(function () {
     grecaptcha
-      .execute("6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI", { action: "submit" })
+      .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
       .then(function (token) {
         $('#loading').show();
         let validateUrl = `${env.backEndApi}/api/lead/validate`;
@@ -223,7 +223,7 @@ async function genOtp(prevForm) {
             if (dataRes.rslt_cd === 's' && dataRes.reason_code === '0') {
               grecaptcha.ready(function () {
                 grecaptcha
-                  .execute("6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI", { action: "submit" })
+                  .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
                   .then(function (token) {
                     $('#loading').show();
                     let urlOtp = `${env.backEndApi}/api/otp/gen-otp`;
@@ -307,7 +307,7 @@ async function genOtp(prevForm) {
 function sendWarehouseProcessRequest(prevForm, otpStatus = "Thất bại") {
   grecaptcha.ready(function () {
     grecaptcha
-        .execute("6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI", {action: "submit"})
+        .execute("GOOGLE_SITE_KEY_TEMP", {action: "submit"})
         .then(function (token) {
           $('#loading').show();
           let formData = $(prevForm).getValue();
@@ -346,7 +346,7 @@ function sendWarehouseProcessRequest(prevForm, otpStatus = "Thất bại") {
 function verifyOtp(otpDegit) {
   grecaptcha.ready(function () {
     grecaptcha
-      .execute("6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI", { action: "submit" })
+      .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
       .then(function (token) {
         $('#loading').show();
         let urlOtp = `${env.backEndApi}/api/otp/verify-otp`;
@@ -371,7 +371,7 @@ function verifyOtp(otpDegit) {
               grecaptcha.ready(function () {
                 isOtpFailed = false;
                 grecaptcha
-                  .execute("6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI", { action: "submit" })
+                  .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
                   .then(function (token) {
                     $('#prev-form').val('');
                     var navigator_info = window.navigator;
@@ -1079,7 +1079,8 @@ const luckyWheelApi = {
     lib.post({ url: `${env.backEndApi}/api/otp/verify-otp`, data: JSON.stringify(payload), ...callbacks });
   },
   getCard: (phone, brand, price, token, callbacks) => {
-    const payload = { brand, phoneNumber: phone, price, token };
+    const formattedBrand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
+    const payload = { brand: formattedBrand, phoneNumber: phone, price, token };
     lib.post({
       url: `${env.backEndApi}/api/mobile-cards/get-card`,
       data: JSON.stringify(payload),
@@ -1345,16 +1346,10 @@ $(document).ready(function () {
         updateAndShowPopup(winningSegment.name);
       });
     }
-
     if (!resultPopup.dataset.listenerAttached) {
-      const closeAllPopups = () => {
-        luckyWheelModalInstance.hide();
-        resultPopup.classList.remove('visible');
-      };
-      resultPopupCloseBtn.addEventListener('click', closeAllPopups);
       resultPopup.addEventListener('click', function(event) {
         if (event.target === this) {
-          closeAllPopups();
+          forceCloseAllModalsAndBackdrops();
         }
       });
       resultPopup.dataset.listenerAttached = 'true';
