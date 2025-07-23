@@ -11908,7 +11908,6 @@
     function cleanupLingeringBackdrop() {
       const backdrop = document.querySelector('.modal-backdrop.show');
       if (backdrop) {
-        console.log("Dọn dẹp backdrop còn sót lại...");
         backdrop.classList.remove('show');
         setTimeout(() => {
           if (backdrop.parentNode) {
