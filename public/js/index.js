@@ -635,6 +635,8 @@ $("#myModal").on("hidden.bs.modal", function () {
 });
 
 function startCountdown() {
+  clearInterval(countdownInterval);
+  isOtpExpired = false;
   const countdownTimeInMinutes = 5;
   const endTime = new Date().getTime() + countdownTimeInMinutes * 60 * 1000;
   function updateCountdown() {
@@ -655,6 +657,7 @@ function startCountdown() {
     } else {
       clearInterval(countdownInterval);
       countdownElement.innerHTML = "Hết hạn nhập thông tin OTP!";
+      isOtpExpired = true;
       myModal.hide();
     }
   }
@@ -888,6 +891,7 @@ let luckyWheelApiToken = null;
 let luckyWheelTransId = null;
 let availablePrices = [];
 let selectedPrice;
+let isOtpExpired = false;
 
 let allWheelSegments = [];
 
@@ -1099,6 +1103,10 @@ $(document).ready(function () {
     modalLuckyWheel = new bootstrap.Modal(document.getElementById("modalLuckyWheel"));
   }
 
+  $('#modalLuckyWheel').on('hidden.bs.modal', function (e) {
+    cleanupLingeringBackdrop();
+  });
+
   luckyWheelUI.resetForm();
 
   $('#lucky-wheel-network').on('change', function() {
@@ -1141,34 +1149,68 @@ $(document).ready(function () {
     if (!validation.valid) {
       return showNotiDefault('error', 'Thông tin chưa đầy đủ', validation.msg);
     }
-    // luckyWheelUI.setLoading(true);
     const phone = $('#lucky-wheel-phone').val();
-
+    if (luckyWheelApiToken) {
+      if (isOtpExpired) {
+        luckyWheelUI.setLoading(true);
+        const transId = uuidv4();
+        luckyWheelApi.generateOtp(phone, transId, {
+          complete: function(otpResponse) {
+            luckyWheelUI.setLoading(false);
+            const otpData = otpResponse.responseJSON;
+            if (otpData.data?.result?.status === true) {
+              luckyWheelTransId = otpData.transId || transId;
+              myModal.show();
+              startCountdown();
+            } else {
+              showNotiDefault('error', 'Lỗi', otpData.errorMessage || 'Không thể tạo lại mã OTP.');
+            }
+          },
+          error: function() {
+            luckyWheelUI.setLoading(false);
+            showNotiDefault('error', 'Lỗi', 'Không thể tạo lại mã OTP, vui lòng thử lại.');
+          }
+        });
+      } else {
+        myModal.show();
+      }
+      return;
+    }
+    // luckyWheelUI.setLoading(true);
     luckyWheelApi.verifyPhone(phone, {
       complete: function(response) {
         const data = response.responseJSON;
         if (data.token) {
           luckyWheelApiToken = data.token;
           const transId = data.request_id || uuidv4();
-
-          luckyWheelApi.generateOtp(phone, transId, {
-            complete: function(otpResponse) {
-              luckyWheelUI.setLoading(false);
-              const otpData = otpResponse.responseJSON;
-              if (otpData.data?.result?.status === true) {
-                luckyWheelTransId = otpData.transId || transId;
-                myModal.show();
-                startCountdown();
-
-              } else {
-                showNotiDefault('error', 'Lỗi', otpData.errorMessage || 'Không thể tạo mã OTP.');
+          if (data.status === 1) {
+            luckyWheelApi.generateOtp(phone, transId, {
+              complete: function(otpResponse) {
+                luckyWheelUI.setLoading(false);
+                const otpData = otpResponse.responseJSON;
+                if (otpData.data?.result?.status === true) {
+                  luckyWheelTransId = otpData.transId || transId;
+                  myModal.show();
+                  startCountdown();
+                } else {
+                  showNotiDefault('error', 'Lỗi', otpData.errorMessage || 'Không thể tạo mã OTP.');
+                  luckyWheelApiToken = null;
+                }
+              },
+              error: function() {
+                luckyWheelUI.setLoading(false);
+                showNotiDefault('error', 'Lỗi', 'Không thể tạo mã OTP, vui lòng thử lại.');
+                luckyWheelApiToken = null;
               }
-            },
-            error: function() {
-              luckyWheelUI.setLoading(false);
-              showNotiDefault('error', 'Lỗi', 'Không thể tạo mã OTP, vui lòng thử lại.');
-            }
-          });
+            });
+          } else if (data.status === 0) {
+            luckyWheelUI.setLoading(false);
+            luckyWheelUI.switchToWheelView();
+          } else {
+            luckyWheelUI.setLoading(false);
+            showNotiDefault('error', 'Lỗi', 'Trạng thái người dùng không xác định.');
+            luckyWheelApiToken = null; // Reset token
+          }
         } else {
           luckyWheelUI.setLoading(false);
           showNotiDefault('error', 'Lỗi', data.rslt_msg || 'Xác thực không thành công.');
@@ -1176,12 +1218,16 @@ $(document).ready(function () {
       },
       error: function(error) {
         luckyWheelUI.setLoading(false);
-        const errorMsg = error.responseJSON?.rslt_msg || 'Số điện thoại của Quý khách không đủ điều kiện tham gia.';
-        showNotiDefault('error', 'Thông báo', errorMsg);
+        const responseData = error.responseJSON;
+        if (responseData && responseData.message === "Bạn đã tham gia chương trình rồi.") {
+          showNotiDefault('info', 'Thông báo', responseData.message);
+        } else {
+          const errorMsg = responseData?.rslt_msg || responseData?.message || 'Số điện thoại của Quý khách không đủ điều kiện tham gia.';
+          showNotiDefault('error', 'Thông báo', errorMsg);
+        }
       }
     });
   });
-
 
   $('#btn-spin-wheel').on('click', function() {
     const wheelImage = document.getElementById('wheel-main-image');

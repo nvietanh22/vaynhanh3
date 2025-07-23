@@ -11881,7 +11881,6 @@
         });
       }
     });
-    // DÁN HÀM NÀY VÀO FILE index.js
     function forceCloseAllModalsAndBackdrops() {
       myModal.hide();
       modalLuckyWheel.hide();
@@ -11904,6 +11903,23 @@
       if (luckyWheelIcon) {
         luckyWheelIcon.style.display = 'none';
       }
+    }
+
+    function cleanupLingeringBackdrop() {
+      const backdrop = document.querySelector('.modal-backdrop.show');
+      if (backdrop) {
+        console.log("Dọn dẹp backdrop còn sót lại...");
+        backdrop.classList.remove('show');
+        setTimeout(() => {
+          if (backdrop.parentNode) {
+            backdrop.parentNode.removeChild(backdrop);
+          }
+        }, 300);
+      }
+
+      document.body.classList.remove('modal-open');
+      document.body.style.paddingRight = '';
+      document.body.style.overflow = '';
     }
   </script>
 
