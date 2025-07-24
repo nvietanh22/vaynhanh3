@@ -913,7 +913,6 @@ const WHEEL_CONFIG = {
     // '100000': 0.05,
     'MMLSau': 0.4
   },
-  // Style cho từng vị trí ô (chẵn/lẻ)
   slotStyles: {
     prize_even: 'font-size: 30px; color: #e7252b;', // Giải thưởng trên nền trắng
     prize_odd: 'font-size: 30px;',              // Giải thưởng trên nền đỏ
@@ -926,8 +925,6 @@ const WHEEL_CONFIG = {
 const distributePrizes = (currentAvailablePrices) => {
   const totalSlots = 10;
   let distributedPrizes = [];
-
-  // Lọc ra các giải thưởng có trong kho VÀ có tỉ lệ > 0
   const validPrizeTypes = Object.keys(WHEEL_CONFIG.prizeInfo)
       .filter(price => price !== 'default' && currentAvailablePrices.includes(price) && WHEEL_CONFIG.prizeRatio[price] > 0);
 
@@ -975,10 +972,10 @@ const updateWheelDOM = (wheelLayout) => {
 
     const isEven = segment.index % 2 === 0;
 
-    if (segment.value) { // Ô chứa giải thưởng
+    if (segment.value) {
       newText = WHEEL_CONFIG.prizeInfo[segment.value].text;
       newStyle = isEven ? WHEEL_CONFIG.slotStyles.prize_even : WHEEL_CONFIG.slotStyles.prize_odd;
-    } else { // Ô chứa "MAY MẮN LẦN SAU"
+    } else {
       newText = WHEEL_CONFIG.prizeInfo.default.text;
       newStyle = isEven ? WHEEL_CONFIG.slotStyles.mmls_even : WHEEL_CONFIG.slotStyles.mmls_odd;
     }
@@ -1050,6 +1047,12 @@ function verifyLuckyWheelOtp(otpDegit) {
         luckyWheelUI.setLoading(false);
         const data = response.responseJSON;
         if (data.data?.result?.authentication === 'ACCEPT') {
+          luckyWheelApi.saveWarehouseRequest(phone, {
+            complete: function (response) {
+              $('#loading').hide();
+            },
+            error: function(err) { showNoti('error', 'Thất bại', err.responseJSON?.message || 'Không thể gửi yêu cầu đến server!'); }
+          });
           modalLuckyWheel.show();
           luckyWheelUI.switchToWheelView();
         } else {
@@ -1071,31 +1074,102 @@ function verifyLuckyWheelOtp(otpDegit) {
 
 const luckyWheelApi = {
   verifyPhone: (phone, callbacks) => {
-    const payload = { request_id: uuidv4(), contact_number: phone, national_id: "" };
-    lib.post({ url: `${env.backEndApi}/api/mobile-cards/verify-phone`, data: JSON.stringify(payload), ...callbacks });
+    grecaptcha.ready(function () {
+      grecaptcha
+          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+          .then(function (token) {
+            const payload = { request_id: uuidv4(), contact_number: phone, national_id: "" };
+            lib.post({ url: `${env.backEndApi}/api/mobile-cards/verify-phone`,
+              token: token,
+              data: JSON.stringify(payload),
+              ...callbacks });
+          });
+    });
   },
   generateOtp: (phone, transId, callbacks) => {
-    const payload = { TransId: transId, Data: { phone, idCard: ""} };
-    lib.post({ url: `${env.backEndApi}/api/otp/gen-otp`, data: JSON.stringify(payload), ...callbacks });
+    grecaptcha.ready(function () {
+      grecaptcha
+          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+          .then(function (token) {
+            const payload = { TransId: transId, Data: { phone, idCard: ""} };
+            lib.post({ url: `${env.backEndApi}/api/otp/gen-otp`,
+              token: token,
+              data: JSON.stringify(payload),
+              ...callbacks });
+          });
+    });
   },
   verifyOtp: (phone, otp, transId, callbacks) => {
-    const payload = { TransId: transId, Data: { phone, otp} };
-    lib.post({ url: `${env.backEndApi}/api/otp/verify-otp`, data: JSON.stringify(payload), ...callbacks });
+    grecaptcha.ready(function () {
+      grecaptcha
+          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+          .then(function (token) {
+            const payload = { TransId: transId, Data: { phone, otp} };
+            lib.post({ url: `${env.backEndApi}/api/otp/verify-otp`,
+              token: token,
+              data: JSON.stringify(payload),
+              ...callbacks });
+          });
+    });
   },
-  getCard: (phone, brand, price, token, callbacks) => {
-    const formattedBrand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
-    const payload = { brand: formattedBrand, phoneNumber: phone, price, token };
-    lib.post({
-      url: `${env.backEndApi}/api/mobile-cards/get-card`,
-      data: JSON.stringify(payload),
-      ...callbacks
+  getCard: (phone, brand, price, apiToken, callbacks) => {
+    grecaptcha.ready(function () {
+      grecaptcha
+          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+          .then(function (token) {
+            const formattedBrand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
+            const payload = { brand: formattedBrand, phoneNumber: phone, price, token: apiToken };
+            lib.post({
+              url: `${env.backEndApi}/api/mobile-cards/get-card`,
+              token: token,
+              data: JSON.stringify(payload),
+              ...callbacks
+            });
+          });
     });
   },
   getPriceList: (brand, callbacks) => {
-    const formattedBrand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
-    const payload = { brand: formattedBrand };
-    lib.post({ url: `${env.backEndApi}/api/mobile-cards/get-price`, data: JSON.stringify(payload), ...callbacks });
+    grecaptcha.ready(function () {
+      grecaptcha
+          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+          .then(function (token) {
+            const formattedBrand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
+            const payload = { brand: formattedBrand };
+            lib.post({ url: `${env.backEndApi}/api/mobile-cards/get-price`,
+              token: token,
+              data: JSON.stringify(payload),
+              ...callbacks });
+          });
+    });
+  },
+  saveWarehouseRequest: (phoneNumber, callbacks) => {
+    grecaptcha.ready(function () {
+      grecaptcha
+          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+          .then(function (token) {
+            const requestData = {
+              custName: "",
+              idCard: "",
+              phoneNumber: phoneNumber,
+              custAddress: "",
+              salaryType: "",
+              timeCall: "",
+              otpStatus: "Thành công",
+              cicStatus: "",
+              obtStatus: "",
+              metadata: "",
+              createdDate: ""
+            };
+            lib.post({
+              url: `${env.backEndApi}/api/mobile-cards/minigame-process`,
+              token: token,
+              data: JSON.stringify(requestData),
+              ...callbacks
+            });
+          });
+    });
   }
+
 };
 
 $(document).ready(function () {
