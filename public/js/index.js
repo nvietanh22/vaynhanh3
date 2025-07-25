@@ -892,7 +892,7 @@ let luckyWheelTransId = null;
 let availablePrices = [];
 let selectedPrice;
 let isOtpExpired = false;
-
+let spinResultData = null;
 let allWheelSegments = [];
 
 const WHEEL_CONFIG = {
@@ -1032,6 +1032,34 @@ const luckyWheelValidation = {
   }
 };
 
+function proceedToSpin(phone, brand, token) {
+  luckyWheelUI.setLoading(true);
+  luckyWheelApi.getSpinResult(phone, brand, token, allWheelSegments, {
+    complete: function(response) {
+      luckyWheelUI.setLoading(false);
+      const data = response.responseJSON;
+      if (data && data.rslt_cd === 's') {
+        // Store the result globally
+        spinResultData = {
+          prize: data.prize,
+          prizeName: data.prizeName,
+          targetIndex: data.targetIndex
+        };
+        console.log('Server determined spin result:', spinResultData);
+        luckyWheelUI.switchToWheelView(); // Now switch to the wheel
+      } else {
+        showNotiDefault('error', 'Lỗi', data.rslt_msg || 'Không thể lấy kết quả vòng quay.');
+        // Don't switch view, let the user try again
+      }
+    },
+    error: function(error) {
+      luckyWheelUI.setLoading(false);
+      showNotiDefault('error', 'Lỗi', error.responseJSON?.message || 'Lỗi khi lấy kết quả vòng quay.');
+    }
+  });
+}
+
+
 function verifyLuckyWheelOtp(otpDegit) {
   if (!luckyWheelApiToken) {
     console.error("Lỗi: verifyLuckyWheelOtp được gọi nhưng không có token.");
@@ -1039,7 +1067,9 @@ function verifyLuckyWheelOtp(otpDegit) {
   }
 
   const phone = $('#lucky-wheel-phone').val();
+  const brand = $('#lucky-wheel-network').val(); // FIX: Get brand value here
   const otpCode = `${otpDegit.code01}${otpDegit.code02}${otpDegit.code03}${otpDegit.code04}${otpDegit.code05}${otpDegit.code06}`;
+
   const processAfterOtpModalHides = () => {
     luckyWheelUI.setLoading(true);
     luckyWheelApi.verifyOtp(phone, otpCode, luckyWheelTransId, {
@@ -1054,7 +1084,7 @@ function verifyLuckyWheelOtp(otpDegit) {
             error: function(err) { showNoti('error', 'Thất bại', err.responseJSON?.message || 'Không thể gửi yêu cầu đến server!'); }
           });
           modalLuckyWheel.show();
-          luckyWheelUI.switchToWheelView();
+          proceedToSpin(phone, brand, luckyWheelApiToken); // Call the new function
         } else {
           showNotiDefault('error', 'Xác thực thất bại', data.errorMessage || 'Mã OTP không chính xác.');
           modalLuckyWheel.show();
@@ -1074,79 +1104,79 @@ function verifyLuckyWheelOtp(otpDegit) {
 
 const luckyWheelApi = {
   verifyPhone: (phone, callbacks) => {
-    grecaptcha.ready(function () {
-      grecaptcha
-          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
-          .then(function (token) {
+    // grecaptcha.ready(function () {
+    //   grecaptcha
+    //       .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+    //       .then(function (token) {
             const payload = { request_id: uuidv4(), contact_number: phone, national_id: "" };
             lib.post({ url: `${env.backEndApi}/api/mobile-cards/verify-phone`,
-              token: token,
+              // token: token,
               data: JSON.stringify(payload),
               ...callbacks });
-          });
-    });
+    //       });
+    // });
   },
   generateOtp: (phone, transId, callbacks) => {
-    grecaptcha.ready(function () {
-      grecaptcha
-          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
-          .then(function (token) {
+    // grecaptcha.ready(function () {
+    //   grecaptcha
+    //       .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+    //       .then(function (token) {
             const payload = { TransId: transId, Data: { phone, idCard: ""} };
             lib.post({ url: `${env.backEndApi}/api/otp/gen-otp`,
-              token: token,
+              // token: token,
               data: JSON.stringify(payload),
               ...callbacks });
-          });
-    });
+    //       });
+    // });
   },
   verifyOtp: (phone, otp, transId, callbacks) => {
-    grecaptcha.ready(function () {
-      grecaptcha
-          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
-          .then(function (token) {
+    // grecaptcha.ready(function () {
+    //   grecaptcha
+    //       .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+    //       .then(function (token) {
             const payload = { TransId: transId, Data: { phone, otp} };
             lib.post({ url: `${env.backEndApi}/api/otp/verify-otp`,
-              token: token,
+              // token: token,
               data: JSON.stringify(payload),
               ...callbacks });
-          });
-    });
+    //       });
+    // });
   },
   getCard: (phone, brand, price, apiToken, callbacks) => {
-    grecaptcha.ready(function () {
-      grecaptcha
-          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
-          .then(function (token) {
+    // grecaptcha.ready(function () {
+    //   grecaptcha
+    //       .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+    //       .then(function (token) {
             const formattedBrand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
             const payload = { brand: formattedBrand, phoneNumber: phone, price, token: apiToken };
             lib.post({
               url: `${env.backEndApi}/api/mobile-cards/get-card`,
-              token: token,
+              // token: token,
               data: JSON.stringify(payload),
               ...callbacks
             });
-          });
-    });
+    //       });
+    // });
   },
   getPriceList: (brand, callbacks) => {
-    grecaptcha.ready(function () {
-      grecaptcha
-          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
-          .then(function (token) {
+    // grecaptcha.ready(function () {
+    //   grecaptcha
+    //       .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+    //       .then(function (token) {
             const formattedBrand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
             const payload = { brand: formattedBrand };
             lib.post({ url: `${env.backEndApi}/api/mobile-cards/get-price`,
-              token: token,
+              // token: token,
               data: JSON.stringify(payload),
               ...callbacks });
-          });
-    });
+    //       });
+    // });
   },
   saveWarehouseRequest: (phoneNumber, callbacks) => {
-    grecaptcha.ready(function () {
-      grecaptcha
-          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
-          .then(function (token) {
+    // grecaptcha.ready(function () {
+    //   grecaptcha
+    //       .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+    //       .then(function (token) {
             const requestData = {
               custName: "",
               idCard: "",
@@ -1162,17 +1192,41 @@ const luckyWheelApi = {
             };
             lib.post({
               url: `${env.backEndApi}/api/mobile-cards/minigame-process`,
-              token: token,
+              // token: token,
               data: JSON.stringify(requestData),
               ...callbacks
             });
-          });
+    //       });
+    // });
+  },
+  getSpinResult: (phone, brand, apiToken, layout, callbacks) => {
+    // grecaptcha.ready(function () {
+    //   grecaptcha
+    //       .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+    //       .then(function (token) {
+            const formattedBrand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
+            const payload = { phoneNumber: phone, brand: formattedBrand, token: apiToken, wheelLayout: layout };
+            lib.post({
+            url: `${env.backEndApi}/api/mobile-cards/spin-result`,
+            data: JSON.stringify(payload),
+            ...callbacks
     });
+    //       });
+    // });
   }
-
 };
 
 $(document).ready(function () {
+  const resultPopup = document.getElementById('result-popup');
+
+  if (resultPopup) {
+    resultPopup.addEventListener('click', function(event) {
+      if (event.target === this) {
+        forceCloseAllModalsAndBackdrops();
+      }
+    });
+  }
+
   if (document.getElementById("modalLuckyWheel")) {
     modalLuckyWheel = new bootstrap.Modal(document.getElementById("modalLuckyWheel"));
   }
@@ -1224,6 +1278,7 @@ $(document).ready(function () {
       return showNotiDefault('error', 'Thông tin chưa đầy đủ', validation.msg);
     }
     const phone = $('#lucky-wheel-phone').val();
+    const brand = $('#lucky-wheel-network').val(); // FIX: Get brand value here
     if (luckyWheelApiToken) {
       if (isOtpExpired) {
         luckyWheelUI.setLoading(true);
@@ -1250,14 +1305,14 @@ $(document).ready(function () {
       }
       return;
     }
-    // luckyWheelUI.setLoading(true);
+    luckyWheelUI.setLoading(true);
     luckyWheelApi.verifyPhone(phone, {
       complete: function(response) {
         const data = response.responseJSON;
         if (data.token) {
           luckyWheelApiToken = data.token;
           const transId = data.request_id || uuidv4();
-          if (data.status === 1) {
+          if (data.status === 1) { // Requires OTP
             luckyWheelApi.generateOtp(phone, transId, {
               complete: function(otpResponse) {
                 luckyWheelUI.setLoading(false);
@@ -1277,9 +1332,9 @@ $(document).ready(function () {
                 luckyWheelApiToken = null;
               }
             });
-          } else if (data.status === 0) {
+          } else if (data.status === 0) { // Already verified, skip OTP
             luckyWheelUI.setLoading(false);
-            luckyWheelUI.switchToWheelView();
+            proceedToSpin(phone, brand, luckyWheelApiToken);
           } else {
             luckyWheelUI.setLoading(false);
             showNotiDefault('error', 'Lỗi', 'Trạng thái người dùng không xác định.');
@@ -1304,13 +1359,65 @@ $(document).ready(function () {
   });
 
   $('#btn-spin-wheel').on('click', function() {
-    const wheelImage = document.getElementById('wheel-main-image');
-    const resultPopup = document.getElementById('result-popup');
-    const resultPopupCloseBtn = resultPopup.querySelector('.result-popup-close-btn');
-    const luckyWheelModalInstance = bootstrap.Modal.getInstance(document.getElementById('modalLuckyWheel')) || new bootstrap.Modal(document.getElementById('modalLuckyWheel'));
     let isSpinning = $(this).data('isSpinning') || false;
+    if (isSpinning) return;
+
+    if (!luckyWheelApiToken) {
+      showNotiDefault('error', 'Lỗi', 'Không có token xác thực. Vui lòng thử lại từ đầu.');
+      return;
+    }
+
+    if (!spinResultData) {
+      showNotiDefault('error', 'Lỗi', 'Không có kết quả vòng quay từ máy chủ. Vui lòng thử lại.');
+      return;
+    }
+
+    $(this).data('isSpinning', true);
+
+    const { prize, prizeName, targetIndex } = spinResultData;
+
+    // tim o chinh xac
+    const winningSegment = allWheelSegments.find(segment => segment.index === targetIndex);
+
+    if (!winningSegment) {
+      showNotiDefault('error', 'Lỗi', 'Lỗi cấu hình vòng quay. Không tìm thấy ô để quay vào.');
+      $(this).data('isSpinning', false);
+      return;
+    }
+
+    console.log("Spinning to index:", targetIndex, "for prize:", prizeName);
+
+    const spinTheWheel = (prizeToLandOn, onSpinEndCallback) => {
+      const wheelImage = document.getElementById('wheel-main-image');
+      const labelContainer = document.getElementById('label-container');
+      const totalSegments = 10;
+      const segmentAngle = 360 / totalSegments;
+      const winningSegmentIndex = prizeToLandOn.index;
+      const randomSpins = Math.floor(Math.random() * 4) + 5;
+      const prizeAngle = winningSegmentIndex * segmentAngle;
+      const arrowOffset = -90;
+      const middleOfSegmentOffset = segmentAngle / 2;
+      const angleJitter = (Math.random() - 0.5) * (segmentAngle * 0.8);
+      const totalRotation = (randomSpins * 360) - prizeAngle - middleOfSegmentOffset + arrowOffset + angleJitter;
+
+      const transitionStyle = 'transform 5s cubic-bezier(0.25, 1, 0.5, 1)';
+      const transformStyle = `rotate(${totalRotation}deg)`;
+
+      wheelImage.style.transition = transitionStyle;
+      wheelImage.style.transform = transformStyle;
+      labelContainer.style.transition = transitionStyle;
+      labelContainer.style.transform = transformStyle;
+
+      wheelImage.addEventListener('transitionend', () => {
+        $('#btn-spin-wheel').data('isSpinning', false);
+        if (onSpinEndCallback) {
+          onSpinEndCallback();
+        }
+      }, { once: true });
+    };
 
     function updateAndShowPopup(prizeName, cardSerial = null) {
+      const resultPopup = document.getElementById('result-popup');
       const resultTitle = resultPopup.querySelector('.result-title');
       const resultSubtext = resultPopup.querySelector('.result-subtext');
       const resultAmount = resultPopup.querySelector('.result-amount');
@@ -1340,139 +1447,34 @@ $(document).ready(function () {
       resultPopup.classList.add('visible');
     }
 
-    const spinTheWheel = (prizeToLandOn, onSpinEndCallback) => {
-      const wheelImage = document.getElementById('wheel-main-image');
-      const labelContainer = document.getElementById('label-container');
-
-      const totalSegments = 10;
-      const segmentAngle = 360 / totalSegments;
-      const initialWheelOffset = 109;
-      const prizeTrueAngle = initialWheelOffset + (prizeToLandOn.index * segmentAngle);
-      const arrowAngle = 270;
-
-      const randomSpins = (Math.floor(Math.random() * 4) + 5) * 360;
-      const angleJitter = (Math.random() - 0.5) * (segmentAngle * 0.8);
-      const totalRotation = randomSpins + (arrowAngle - prizeTrueAngle) + angleJitter;
-
-      wheelImage.dataset.rotation = totalRotation;
-      labelContainer.dataset.rotation = totalRotation;
-
-      const transitionStyle = 'transform 5s cubic-bezier(0.25, 1, 0.5, 1)';
-      const transformStyle = `rotate(${totalRotation}deg)`;
-
-      setTimeout(() => {
-        wheelImage.style.transform = 'rotate(0deg)';
-        labelContainer.style.transform = 'rotate(0deg)';
-
-        const totalSegments = 10;
-        const segmentAngle = 360 / totalSegments;
-        const winningSegmentIndex = prizeToLandOn.index;
-        const randomSpins = Math.floor(Math.random() * 4) + 5;
-        const prizeAngle = winningSegmentIndex * segmentAngle;
-        const arrowOffset = -90;
-        const middleOfSegmentOffset = segmentAngle / 2;
-        const angleJitter = (Math.random() - 0.5) * (segmentAngle * 0.8);
-        const totalRotation = (randomSpins * 360) - prizeAngle - middleOfSegmentOffset + arrowOffset + angleJitter;
-        setTimeout(() => {
-          const transitionStyle = 'transform 5s cubic-bezier(0.25, 1, 0.5, 1)';
-          const transformStyle = `rotate(${totalRotation}deg)`;
-
-          wheelImage.style.transition = transitionStyle;
-          wheelImage.style.transform = transformStyle;
-
-          labelContainer.style.transition = transitionStyle;
-          labelContainer.style.transform = transformStyle;
-        }, 20);
-
-      }, 10);
-
-      wheelImage.addEventListener('transitionend', () => {
-        $('#btn-spin-wheel').data('isSpinning', false);
-        // luckyWheelUI.setLoading(false);
-
-        if (onSpinEndCallback) {
-          onSpinEndCallback();
-        }
-      }, { once: true });
-    };
-
-    if (isSpinning) return;
-    if (!luckyWheelApiToken) {
-      showNotiDefault('error', 'Lỗi', 'Không có token xác thực. Vui lòng thử lại từ đầu.');
-      return;
-    }
-
-    $(this).data('isSpinning', true);
-    // luckyWheelUI.setLoading(true);
-
-    const prizeRatio = WHEEL_CONFIG.prizeRatio;
-    const virtualWheel = [];
-    allWheelSegments.forEach(segment => {
-      const ratioKey = segment.value ? segment.value : 'MMLSau';
-      const tickets = (prizeRatio[ratioKey] || 0) * 10;
-      for(let i = 0; i < tickets; i++) {
-        virtualWheel.push(segment);
-      }
-    });
-
-    if (virtualWheel.length === 0) {
-      const losingSegments = allWheelSegments.filter(s => s.value === null);
-      if (losingSegments.length > 0) {
-        losingSegments.forEach(s => virtualWheel.push(s));
-      } else {
-        luckyWheelUI.setLoading(false);
-        $(this).data('isSpinning', false);
-        showNotiDefault('error', 'Lỗi', 'Không có giải thưởng nào để quay.');
-        return;
-      }
-    }
-
-    const randomVirtualIndex = Math.floor(Math.random() * virtualWheel.length);
-    const decidedPrize = virtualWheel[randomVirtualIndex];
-
-    const matchingRealSegments = allWheelSegments.filter(s => s.value === decidedPrize.value);
-    const winningSegment = matchingRealSegments[Math.floor(Math.random() * matchingRealSegments.length)];
-
-    console.log("Giải thưởng đã quyết định:", decidedPrize.name);
-    console.log("Sẽ quay vào ô có index:", winningSegment.index);
-
-    if (winningSegment.value) {
+    if (prize) {
       const phone = $('#lucky-wheel-phone').val();
       const network = $('#lucky-wheel-network').val();
-
-      luckyWheelApi.getCard(phone, network, winningSegment.value, luckyWheelApiToken, {
-        complete: function(response) {
-          const data = response.responseJSON;
-          if (data && data.cardNumber) {
-            spinTheWheel(winningSegment, () => {
-              updateAndShowPopup(winningSegment.name, data.cardNumber);
-            });
-          } else {
-            luckyWheelUI.setLoading(false);
-            $('#btn-spin-wheel').data('isSpinning', false);
-            showNotiDefault('error', 'Lỗi', data.message || 'Không nhận được thẻ cào từ hệ thống. Vui lòng thử lại.');
-          }
-          luckyWheelApiToken = null;
-        },
-        error: function(error) {
-          luckyWheelUI.setLoading(false);
-          $('#btn-spin-wheel').data('isSpinning', false);
-          showNotiDefault('error', 'Lỗi', error.responseJSON?.message || 'Lỗi khi đổi thưởng.');
-          luckyWheelApiToken = null;
-        }
-      });
-    } else {
       spinTheWheel(winningSegment, () => {
-        updateAndShowPopup(winningSegment.name);
+        luckyWheelUI.setLoading(true);
+        luckyWheelApi.getCard(phone, network, prize, luckyWheelApiToken, {
+          complete: function(response) {
+            luckyWheelUI.setLoading(false);
+            const data = response.responseJSON;
+            if (data && data.cardNumber) {
+              updateAndShowPopup(prizeName, data.cardNumber);
+            } else {
+              showNotiDefault('error', 'Lỗi', data.message || 'Không nhận được thẻ cào từ hệ thống.');
+            }
+            luckyWheelApiToken = null;
+          },
+          error: function(error) {
+            luckyWheelUI.setLoading(false);
+            showNotiDefault('error', 'Lỗi', error.responseJSON?.message || 'Lỗi khi đổi thưởng.');
+            luckyWheelApiToken = null;
+          }
+        });
       });
-    }
-    if (!resultPopup.dataset.listenerAttached) {
-      resultPopup.addEventListener('click', function(event) {
-        if (event.target === this) {
-          forceCloseAllModalsAndBackdrops();
-        }
+    } else { // Lost
+      spinTheWheel(winningSegment, () => {
+        updateAndShowPopup(prizeName);
+        luckyWheelApiToken = null;
       });
-      resultPopup.dataset.listenerAttached = 'true';
     }
   });
 });
