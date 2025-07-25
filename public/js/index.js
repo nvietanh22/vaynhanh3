@@ -902,7 +902,7 @@ const WHEEL_CONFIG = {
     '20000': { text: '20K', name: '20K' },
     '50000': { text: '50K', name: '50K' },
     '100000': { text: '100K', name: '100K' },
-    'default': { text: 'MAY MẮN LẦN SAU', name: 'MAY MẮN LẦN SAU' }
+    'default': { text: 'MAY MẮN LẦN SAU', name: 'unlucky' }
   },
 
   prizeRatio: {
@@ -911,7 +911,7 @@ const WHEEL_CONFIG = {
     '50000': 0.0,
 
     // '100000': 0.05,
-    'MMLSau': 0.4
+    'unlucky': 0.4
   },
   slotStyles: {
     prize_even: 'font-size: 30px; color: #e7252b;', // Giải thưởng trên nền trắng
@@ -930,7 +930,7 @@ const distributePrizes = (currentAvailablePrices) => {
 
 
   const totalAvailableRatio = validPrizeTypes.reduce((sum, price) => sum + WHEEL_CONFIG.prizeRatio[price], 0);
-  const mmlsRatio = WHEEL_CONFIG.prizeRatio['MMLSau'];
+  const mmlsRatio = WHEEL_CONFIG.prizeRatio['unlucky'];
   const totalRatio = totalAvailableRatio + mmlsRatio;
 
   let slotsFilled = 0;
@@ -949,7 +949,7 @@ const distributePrizes = (currentAvailablePrices) => {
 
 
   while (slotsFilled < totalSlots) {
-    distributedPrizes.push({ value: null, name: 'MAY MẮN LẦN SAU' });
+    distributedPrizes.push({ value: null, name: 'unlucky' });
     slotsFilled++;
   }
 
@@ -1416,7 +1416,7 @@ $(document).ready(function () {
       }, { once: true });
     };
 
-    function updateAndShowPopup(prizeName, cardSerial = null) {
+    function updateAndShowPopup(prize, cardSerial = null) {
       const resultPopup = document.getElementById('result-popup');
       const resultTitle = resultPopup.querySelector('.result-title');
       const resultSubtext = resultPopup.querySelector('.result-subtext');
@@ -1426,7 +1426,7 @@ $(document).ready(function () {
       const shareLinks = resultPopup.querySelector('.result-share-links');
       const partyPopper = '<img src="./ladi/Party-Popper.png" alt="party popper" class="party-popper-icon">';
 
-      if (prizeName === "MAY MẮN LẦN SAU") {
+      if (prize === null) {
         resultTitle.innerHTML = "CHÚC BẠN MAY MẮN LẦN SAU!";
         resultSubtext.textContent = "Cảm ơn bạn đã tham gia chương trình của LOTTE Finance.";
         resultAmount.style.display = 'none';
@@ -1434,7 +1434,8 @@ $(document).ready(function () {
         resultNote.style.display = 'none';
         shareLinks.style.display = 'none';
       } else {
-        const formattedAmount = parseInt(prizeName.replace('K', '')) + ',000 VND';
+        // const formattedAmount = parseInt(prizeName.replace('K', '')) + ',000 VND';
+        const formattedAmount = parseInt(prize).toLocaleString('de-DE') + ' VND';
         resultTitle.innerHTML = `XIN CHÚC MỪNG! ${partyPopper}`;
         resultSubtext.textContent = "Bạn đã nhận được một thẻ điện thoại";
         resultAmount.textContent = formattedAmount;
@@ -1457,7 +1458,7 @@ $(document).ready(function () {
             luckyWheelUI.setLoading(false);
             const data = response.responseJSON;
             if (data && data.cardNumber) {
-              updateAndShowPopup(prizeName, data.cardNumber);
+              updateAndShowPopup(prize, data.cardNumber);
             } else {
               showNotiDefault('error', 'Lỗi', data.message || 'Không nhận được thẻ cào từ hệ thống.');
             }
@@ -1472,7 +1473,7 @@ $(document).ready(function () {
       });
     } else { // Lost
       spinTheWheel(winningSegment, () => {
-        updateAndShowPopup(prizeName);
+        updateAndShowPopup(prize);
         luckyWheelApiToken = null;
       });
     }
