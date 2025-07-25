@@ -11882,29 +11882,42 @@
       }
     });
     function forceCloseAllModalsAndBackdrops() {
-      myModal.hide();
-      modalLuckyWheel.hide();
+      // Lấy instance của các modal Bootstrap
+      const luckyWheelModalInstance = bootstrap.Modal.getInstance(document.getElementById('modalLuckyWheel'));
+      const myModalInstance = bootstrap.Modal.getInstance(document.getElementById('myModal'));
+
+      // Ẩn các modal Bootstrap nếu chúng đang mở
+      if (luckyWheelModalInstance) {
+        luckyWheelModalInstance.hide();
+      }
+      if (myModalInstance) {
+        myModalInstance.hide();
+      }
+
+      // Ẩn popup kết quả tùy chỉnh
       const resultPopup = document.getElementById('result-popup');
       if (resultPopup) {
         resultPopup.classList.remove('visible');
       }
-      const backdrops = document.querySelectorAll('.modal-backdrop');
-      backdrops.forEach(backdrop => {
-        setTimeout(() => {
-          if (backdrop.parentNode) {
-            backdrop.parentNode.removeChild(backdrop);
-          }
-        }, 300);
-      });
-      document.body.classList.remove('modal-open');
-      document.body.style.paddingRight = '';
-      document.body.style.overflow = '';
+
+      // Đợi một chút để Bootstrap hoàn tất animation, sau đó dọn dẹp triệt để
+      setTimeout(() => {
+        // Xóa tất cả các backdrop còn sót lại
+        const backdrops = document.querySelectorAll('.modal-backdrop');
+        backdrops.forEach(backdrop => backdrop.remove());
+
+        // Khôi phục trạng thái của thẻ body
+        document.body.classList.remove('modal-open');
+        document.body.style.paddingRight = '';
+        document.body.style.overflow = '';
+      }, 300); // 300ms là đủ để animation của Bootstrap kết thúc
+
+      // Ẩn icon vòng quay sau khi người dùng đã chơi xong
       const luckyWheelIcon = document.getElementById('lucky-wheel-fixed');
       if (luckyWheelIcon) {
         luckyWheelIcon.style.display = 'none';
       }
     }
-
     function cleanupLingeringBackdrop() {
       const backdrop = document.querySelector('.modal-backdrop.show');
       if (backdrop) {
