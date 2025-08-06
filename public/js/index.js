@@ -1121,79 +1121,79 @@ function verifyLuckyWheelOtp(otpDegit) {
 
 const luckyWheelApi = {
   verifyPhone: (phone, callbacks) => {
-    // grecaptcha.ready(function () {
-    //   grecaptcha
-    //       .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
-    //       .then(function (token) {
+    grecaptcha.ready(function () {
+      grecaptcha
+          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+          .then(function (token) {
             const payload = { request_id: uuidv4(), contact_number: phone, national_id: "" };
             lib.post({ url: `${env.backEndApi}/api/mobile-cards/verify-phone`,
-              // token: token,
+              token: token,
               data: JSON.stringify(payload),
               ...callbacks });
-    //       });
-    // });
+          });
+    });
   },
   generateOtp: (phone, transId, callbacks) => {
-    // grecaptcha.ready(function () {
-    //   grecaptcha
-    //       .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
-    //       .then(function (token) {
+    grecaptcha.ready(function () {
+      grecaptcha
+          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+          .then(function (token) {
             const payload = { TransId: transId, Data: { phone, idCard: ""} };
             lib.post({ url: `${env.backEndApi}/api/otp/gen-otp`,
-              // token: token,
+              token: token,
               data: JSON.stringify(payload),
               ...callbacks });
-    //       });
-    // });
+          });
+    });
   },
   verifyOtp: (phone, otp, transId, callbacks) => {
-    // grecaptcha.ready(function () {
-    //   grecaptcha
-    //       .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
-    //       .then(function (token) {
+    grecaptcha.ready(function () {
+      grecaptcha
+          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+          .then(function (token) {
             const payload = { TransId: transId, Data: { phone, otp} };
             lib.post({ url: `${env.backEndApi}/api/otp/verify-otp`,
-              // token: token,
+              token: token,
               data: JSON.stringify(payload),
               ...callbacks });
-    //       });
-    // });
+          });
+    });
   },
   getCard: (phone, brand, price, apiToken, callbacks) => {
-    // grecaptcha.ready(function () {
-    //   grecaptcha
-    //       .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
-    //       .then(function (token) {
+    grecaptcha.ready(function () {
+      grecaptcha
+          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+          .then(function (token) {
             const formattedBrand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
             const payload = { brand: formattedBrand, phoneNumber: phone, price, token: apiToken };
             lib.post({
               url: `${env.backEndApi}/api/mobile-cards/get-card`,
-              // token: token,
+              token: token,
               data: JSON.stringify(payload),
               ...callbacks
             });
-    //       });
-    // });
+          });
+    });
   },
   getPriceList: (brand, callbacks) => {
-    // grecaptcha.ready(function () {
-    //   grecaptcha
-    //       .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
-    //       .then(function (token) {
+    grecaptcha.ready(function () {
+      grecaptcha
+          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+          .then(function (token) {
             const formattedBrand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
             const payload = { brand: formattedBrand };
             lib.post({ url: `${env.backEndApi}/api/mobile-cards/get-price`,
-              // token: token,
+              token: token,
               data: JSON.stringify(payload),
               ...callbacks });
-    //       });
-    // });
+          });
+    });
   },
   saveWarehouseRequest: (phoneNumber, callbacks) => {
-    // grecaptcha.ready(function () {
-    //   grecaptcha
-    //       .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
-    //       .then(function (token) {
+    grecaptcha.ready(function () {
+      grecaptcha
+          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+          .then(function (token) {
             const requestData = {
               custName: "",
               idCard: "",
@@ -1209,39 +1209,47 @@ const luckyWheelApi = {
             };
             lib.post({
               url: `${env.backEndApi}/api/mobile-cards/minigame-process`,
-              // token: token,
+              token: token,
               data: JSON.stringify(requestData),
               ...callbacks
             });
-    //       });
-    // });
+          });
+    });
   },
   getSpinResult: (phone, brand, apiToken, layoutId, callbacks) => {
-    // grecaptcha.ready(function () {
-    //   grecaptcha
-    //       .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
-    //       .then(function (token) {
+    grecaptcha.ready(function () {
+      grecaptcha
+          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+          .then(function (token) {
             const formattedBrand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
 
             const payload = { phoneNumber: phone, brand: formattedBrand, token: apiToken, layoutId: layoutId };
             lib.post({
             url: `${env.backEndApi}/api/mobile-cards/spin-result`,
+              token: token,
             data: JSON.stringify(payload),
             ...callbacks
           });
-    //       });
-    // });
+          });
+    });
   },
 
   generateLayout: (brand, callbacks) => {
-    const formattedBrand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
-    const payload = { brand: formattedBrand };
-    lib.post({
-      url: `${env.backEndApi}/api/mobile-cards/generate-layout`,
-      data: JSON.stringify(payload),
-      ...callbacks
-    });
-  },
+    grecaptcha.ready(function () {
+      grecaptcha
+          .execute("GOOGLE_SITE_KEY_TEMP", { action: "submit" })
+          .then(function (token) {
+            const formattedBrand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
+            const payload = { brand: formattedBrand };
+            lib.post({
+              url: `${env.backEndApi}/api/mobile-cards/generate-layout`,
+              token: token,
+              data: JSON.stringify(payload),
+              ...callbacks
+            });
+          });
+      });
+    },
 };
 
 $(document).ready(function () {
@@ -1392,12 +1400,12 @@ $(document).ready(function () {
     if (isSpinning) return;
 
     if (!luckyWheelApiToken) {
-      showNotiDefault('error', 'Lỗi', 'Không có token xác thực. Vui lòng thử lại từ đầu.');
+      showNotiDefault('error', 'Lỗi', 'Bạn đã tham gia chương trình rồi!!!');
       return;
     }
 
     if (!spinResultData) {
-      showNotiDefault('error', 'Lỗi', 'Không có kết quả vòng quay từ máy chủ. Vui lòng thử lại.');
+      // showNotiDefault('error', 'Lỗi', 'Có lỗi xảy ra, vui lòng liên hệ quản trị viên.');
       return;
     }
 
