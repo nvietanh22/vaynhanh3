@@ -1329,6 +1329,9 @@
     }
 
     @media (max-width: 767px) {
+      .small-text {
+        font-size: 16px;
+      }
       .ladi-element.ladi-auto-scroll {
         overflow-x: auto;
         overflow-y: hidden;
@@ -7094,9 +7097,7 @@
             <!--              <div class="slide slide-gif" style="background-image: url('./ladi/vay4buoc.gif');"></div>-->
             <!--              <div class="slide" style="background-image: url('./ladi/kv-vay-nhanh-lai-canh-tranh-1000x310-1-20240318111907-iu7ag.png');"></div>-->
             <div class="slide slide-video">
-              <video autoplay loop muted playsinline>
-                <source src="./ladi/slide-bn-2.mp4" type="video/mp4">
-              </video>
+                <img src="./ladi/slide-bn-2.gif" alt="slide gif" />
             </div>
             <div class="slide slide-static"></div>
             <!--              <div class="slide slide-gif" style="background-image: url('./ladi/vay4buoc.gif');"></div>-->
@@ -7148,6 +7149,7 @@
                                     class="ladi-form-control ladi-form-control-select" data-selected="">
                                     <option value="" class="ladi-hidden">Chọn thời gian nhận cuộc gọi tư vấn
                                     </option>
+                                    <option value="Tư vấn ngay">Tư vấn ngay</option>
                                     <option value="Liên hệ ngay trong vòng 1 giờ">Liên hệ ngay trong vòng 1 giờ</option>
                                     <option value="Thứ 2-Thứ 6:8:00-10:00">8:00 - 10:00</option>
                                     <option value="Thứ 2-Thứ 6:10:00-12:00">10:00 - 12:00</option>
@@ -7156,7 +7158,6 @@
                                     <option value="Thứ 2-Thứ 6:16:00-17:30">16:00 - 17:30</option>
                                     <option value="Thứ 2-Thứ 6:17:30-19:00">17:30 - 19:00</option>
                                     <option value="Thứ 2-Thứ 6:Sau 19h">Sau 19h</option>
-                                    <option value="Tư vấn ngay">Tư vấn ngay</option>
                                   </select>
                                 </div>
                               </div>
@@ -7168,12 +7169,12 @@
                                     class="ladi-form-control ladi-form-control-select" data-selected="">
                                     <option value="" class="ladi-hidden">Chọn thời gian nhận cuộc gọi tư vấn
                                     </option>
+                                    <option value="Tư vấn ngay">Tư vấn ngay</option>
                                     <option value="Thứ 7:8:00-10:00">8:00 - 10:00</option>
                                     <option value="Thứ 7:10:00-12:00">10:00 - 12:00</option>
                                     <option value="Thứ 7:12:00-14:00">12:00 - 14:00</option>
                                     <option value="Thứ 7:14:00-16:00">14:00 - 16:00</option>
                                     <option value="Thứ 7:16:00-17:30">16:00 - 17:30</option>
-                                    <option value="Tư vấn ngay">Tư vấn ngay</option>
                                   </select>
                                 </div>
                               </div>
@@ -7470,6 +7471,7 @@
                                         class="ladi-form-control ladi-form-control-select" data-selected="">
                                         <option value="" class="ladi-hidden">Chọn thời gian nhận cuộc gọi tư vấn
                                         </option>
+                                        <option value="Tư vấn ngay">Tư vấn ngay</option>
                                         <option value="Liên hệ ngay trong vòng 1 giờ">Liên hệ ngay trong vòng 1 giờ</option>
                                         <option value="Thứ 2-Thứ 6:8:00-10:00">8:00 - 10:00</option>
                                         <option value="Thứ 2-Thứ 6:10:00-12:00">10:00 - 12:00</option>
@@ -7478,7 +7480,6 @@
                                         <option value="Thứ 2-Thứ 6:16:00-17:30">16:00 - 17:30</option>
                                         <option value="Thứ 2-Thứ 6:17:30-19:00">17:30 - 19:00</option>
                                         <option value="Thứ 2-Thứ 6:Sau 19h">Sau 19h</option>
-                                        <option value="Tư vấn ngay">Tư vấn ngay</option>
                                       </select>
                                     </div>
                                   </div>
@@ -7490,12 +7491,12 @@
                                         class="ladi-form-control ladi-form-control-select" data-selected="">
                                         <option value="" class="ladi-hidden">Chọn thời gian nhận cuộc gọi tư vấn
                                         </option>
+                                        <option value="Tư vấn ngay">Tư vấn ngay</option>
                                         <option value="Thứ 7:8:00-10:00">8:00 - 10:00</option>
                                         <option value="Thứ 7:10:00-12:00">10:00 - 12:00</option>
                                         <option value="Thứ 7:12:00-14:00">12:00 - 14:00</option>
                                         <option value="Thứ 7:14:00-16:00">14:00 - 16:00</option>
                                         <option value="Thứ 7:16:00-17:30">16:00 - 17:30</option>
-                                        <option value="Tư vấn ngay">Tư vấn ngay</option>
                                       </select>
                                     </div>
                                   </div>
@@ -7881,7 +7882,7 @@
                 </div>
                 <div id="PARAGRAPH4" class='ladi-element'>
                   <div class='ladi-paragraph ladi-transition'>Lãi suất cạnh tranh *<br><span
-                      style="color: rgb(231, 37, 43);">Chỉ từ 10 %/ năm</span></div>
+                      style="color: rgb(231, 37, 43);" class = 'small-text'>Chỉ từ 0.65%/tháng</span></div>
                 </div>
               </div>
             </div>
@@ -9286,6 +9287,7 @@
                       <select class="form-select" aria-label="" name="timeCall1" id="formModalSelectTimeCall1" disabled>
                         <option value="" class="ladi-hidden">Chọn thời gian nhận cuộc gọi tư vấn
                         </option>
+                        <option value="Tư vấn ngay">Tư vấn ngay</option>
                         <option value="Liên hệ ngay trong vòng 1 giờ">Liên hệ ngay trong vòng 1 giờ</option>
                         <option value="Thứ 2-Thứ 6:8:00-10:00">8:00 - 10:00</option>
                         <option value="Thứ 2-Thứ 6:10:00-12:00">10:00 - 12:00</option>
@@ -9294,17 +9296,16 @@
                         <option value="Thứ 2-Thứ 6:16:00-17:30">16:00 - 17:30</option>
                         <option value="Thứ 2-Thứ 6:17:30-19:00">17:30 - 19:00</option>
                         <option value="Thứ 2-Thứ 6:Sau 19h">Sau 19h</option>
-                        <option value="Tư vấn ngay">Tư vấn ngay</option>
                       </select>
                       <select class="form-select d-none" aria-label="" name="timeCall2" id="formModalSelectTimeCall2" disabled>
                         <option value="" class="ladi-hidden">Chọn thời gian nhận cuộc gọi tư vấn
                         </option>
+                        <option value="Tư vấn ngay">Tư vấn ngay</option>
                         <option value="Thứ 7:8:00-10:00">8:00 - 10:00</option>
                         <option value="Thứ 7:10:00-12:00">10:00 - 12:00</option>
                         <option value="Thứ 7:12:00-14:00">12:00 - 14:00</option>
                         <option value="Thứ 7:14:00-16:00">14:00 - 16:00</option>
                         <option value="Thứ 7:16:00-17:30">16:00 - 17:30</option>
-                        <option value="Tư vấn ngay">Tư vấn ngay</option>
                       </select>
                     </div>
                     <div class="mb-3">
