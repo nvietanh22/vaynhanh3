@@ -7388,17 +7388,13 @@
           <div class="slider">
             <!--              <div class="slide slide-gif" style="background-image: url('./ladi/vay4buoc.gif');"></div>-->
             <!--              <div class="slide" style="background-image: url('./ladi/kv-vay-nhanh-lai-canh-tranh-1000x310-1-20240318111907-iu7ag.png');"></div>-->
-            <div class="slide slide-video">
-              <video autoplay loop muted playsinline>
-                <source src="./ladi/slide-bn-mb-2.mp4" type="video/mp4">
-              </video>
-            </div>
+            <div class="slide slide-gif" aria-label="GIF demo"
+                 style="background-image:url('./ladi/slide-bn-2-mb.gif');"></div>
+            <!-- Slide 2: Giữ nguyên -->
             <div class="slide slide-static"></div>
-            <div class="slide slide-video">
-              <video autoplay loop muted playsinline>
-                <source src="./ladi/slide-bn-mb-2.mp4" type="video/mp4">
-              </video>
-            </div>
+            <!-- Slide 3: Đổi từ GIF sang Video -->
+            <div class="slide slide-gif" aria-label="GIF demo"
+                 style="background-image:url('./ladi/slide-bn-2-mb.gif');"></div>
             <!--              <div class="slide slide-gif" style="background-image: url('./ladi/vay4buoc.gif');"></div>-->
           </div>
         </div>
@@ -10050,9 +10046,9 @@
     /* --- Ảnh nền cho Mobile (màn hình nhỏ hơn hoặc bằng 767px) --- */
     @media (max-width: 767px) {
       /* Ghi đè ảnh GIF cho màn hình mobile */
-      .slide-gif {
-        background-image: url('./ladi/vay4buocmb.gif');
-      }
+      /*.slide-gif {*/
+      /*  background-image: url('./ladi/vay4buocmb.gif');*/
+      /*}*/
 
       /* Nếu ảnh tĩnh cũng cần thay đổi cho mobile, bạn sẽ thêm nó ở đây */
       /* .slide-static { background-image: url('./path/to/mobile-static-image.png'); } */
@@ -10084,18 +10080,18 @@
     .slide-video {
       position: relative;
       overflow: hidden;
-      background-color: #000;
+      background: transparent;
     }
 
-    .slide-video video {
+    .slide-video img {
       position: absolute;
-      /*transform: translate(-50%, -50%);*/
-      min-width: 120%;
-      min-height: 100%;
-      /*width: auto;*/
-      height: auto;
-      z-index: 10;
-      object-fit: cover;
+      top: 0;
+      left: 60%;
+      height: 100%;
+      width: auto;
+      transform: translateX(-50%);
+      display: block;
+      max-width: none;
     }
 
     @media (min-width: 768px) {
