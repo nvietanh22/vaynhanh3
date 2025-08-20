@@ -7064,13 +7064,13 @@
             <div class="ladi-image-background"></div>
           </div>
         </div>
-        <div id="custom-partner-logo-wrapper">
-          <div id="custom-partner-separator"></div>
-          <div id="custom-partner-content">
-            <p id="custom-partner-text">Đối tác bảo hiểm</p>
-            <img id="custom-partner-image" src="./ladi/logo-05.png" alt="MicroFin Partner Logo">
-          </div>
-        </div>
+<!--        <div id="custom-partner-logo-wrapper">-->
+<!--          <div id="custom-partner-separator"></div>-->
+<!--          <div id="custom-partner-content">-->
+<!--            <p id="custom-partner-text">Đối tác bảo hiểm</p>-->
+<!--            <img id="custom-partner-image" src="./ladi/logo-05.png" alt="MicroFin Partner Logo">-->
+<!--          </div>-->
+<!--        </div>-->
 
         <div data-action="true" id="BUTTON10" class='ladi-element'>
           <div class='ladi-button ladi-transition'>
@@ -7388,17 +7388,13 @@
           <div class="slider">
             <!--              <div class="slide slide-gif" style="background-image: url('./ladi/vay4buoc.gif');"></div>-->
             <!--              <div class="slide" style="background-image: url('./ladi/kv-vay-nhanh-lai-canh-tranh-1000x310-1-20240318111907-iu7ag.png');"></div>-->
-            <div class="slide slide-video">
-              <video autoplay loop muted playsinline>
-                <source src="./ladi/slide-bn-mb-2.mp4" type="video/mp4">
-              </video>
-            </div>
+            <div class="slide slide-gif" aria-label="GIF demo"
+                 style="background-image:url('./ladi/slide-bn-2-mb.gif');"></div>
+            <!-- Slide 2: Giữ nguyên -->
             <div class="slide slide-static"></div>
-            <div class="slide slide-video">
-              <video autoplay loop muted playsinline>
-                <source src="./ladi/slide-bn-mb-2.mp4" type="video/mp4">
-              </video>
-            </div>
+            <!-- Slide 3: Đổi từ GIF sang Video -->
+            <div class="slide slide-gif" aria-label="GIF demo"
+                 style="background-image:url('./ladi/slide-bn-2-mb.gif');"></div>
             <!--              <div class="slide slide-gif" style="background-image: url('./ladi/vay4buoc.gif');"></div>-->
           </div>
         </div>
@@ -8226,24 +8222,24 @@
       </div>
     </div>
 
-    <div id="INSURANCE_PARTNER_SECTION" class="ladi-section">
-      <div class="ladi-section-background" style="background-color: rgb(244, 245, 247);"></div>
-      <div class="ladi-container">
-        <div class="insurance-partner-card">
-          <img src="./ladi/logo-06.png" alt="Microfin Partner Logo" class="insurance-partner-single-logo">
-          <div class="insurance-text-group">
-            <h2 class="insurance-partner-title">Đối tác bảo hiểm Microfin</h2>
-            <p class="insurance-partner-description">
-              Microfin sở hữu đội ngũ chuyên gia giàu kinh nghiệm trong lĩnh vực bảo hiểm và công nghệ.<br>
-              <br>
-              Công ty hướng đến cung cấp giải pháp bảo hiểm thông minh, dễ tiếp cận, tập trung vào cải tiến công nghệ cho toàn bộ hành trình khách hàng.
-            </p>
-            <a href="#" class="insurance-partner-link">Tìm hiểu thêm →</a>
-          </div>
+<!--    <div id="INSURANCE_PARTNER_SECTION" class="ladi-section">-->
+<!--      <div class="ladi-section-background" style="background-color: rgb(244, 245, 247);"></div>-->
+<!--      <div class="ladi-container">-->
+<!--        <div class="insurance-partner-card">-->
+<!--          <img src="./ladi/logo-06.png" alt="Microfin Partner Logo" class="insurance-partner-single-logo">-->
+<!--          <div class="insurance-text-group">-->
+<!--            <h2 class="insurance-partner-title">Đối tác bảo hiểm Microfin</h2>-->
+<!--            <p class="insurance-partner-description">-->
+<!--              Microfin sở hữu đội ngũ chuyên gia giàu kinh nghiệm trong lĩnh vực bảo hiểm và công nghệ.<br>-->
+<!--              <br>-->
+<!--              Công ty hướng đến cung cấp giải pháp bảo hiểm thông minh, dễ tiếp cận, tập trung vào cải tiến công nghệ cho toàn bộ hành trình khách hàng.-->
+<!--            </p>-->
+<!--            <a href="#" class="insurance-partner-link">Tìm hiểu thêm →</a>-->
+<!--          </div>-->
 
-        </div>
-      </div>
-    </div>
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 
     <div id="SECTION6" class='ladi-section'>
       <div class='ladi-section-background'></div>
@@ -10050,9 +10046,9 @@
     /* --- Ảnh nền cho Mobile (màn hình nhỏ hơn hoặc bằng 767px) --- */
     @media (max-width: 767px) {
       /* Ghi đè ảnh GIF cho màn hình mobile */
-      .slide-gif {
-        background-image: url('./ladi/vay4buocmb.gif');
-      }
+      /*.slide-gif {*/
+      /*  background-image: url('./ladi/vay4buocmb.gif');*/
+      /*}*/
 
       /* Nếu ảnh tĩnh cũng cần thay đổi cho mobile, bạn sẽ thêm nó ở đây */
       /* .slide-static { background-image: url('./path/to/mobile-static-image.png'); } */
@@ -10084,18 +10080,18 @@
     .slide-video {
       position: relative;
       overflow: hidden;
-      background-color: #000;
+      background: transparent;
     }
 
-    .slide-video video {
+    .slide-video img {
       position: absolute;
-      /*transform: translate(-50%, -50%);*/
-      min-width: 120%;
-      min-height: 100%;
-      /*width: auto;*/
-      height: auto;
-      z-index: 10;
-      object-fit: cover;
+      top: 0;
+      left: 60%;
+      height: 100%;
+      width: auto;
+      transform: translateX(-50%);
+      display: block;
+      max-width: none;
     }
 
     @media (min-width: 768px) {
