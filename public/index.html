@@ -7099,7 +7099,7 @@
             <div class="slide slide-video">
                 <img src="./ladi/slide-bn-2.gif" alt="slide gif" />
             </div>
-            <div class="slide slide-static"></div>
+<!--            <div class="slide slide-static"></div>-->
             <!--              <div class="slide slide-gif" style="background-image: url('./ladi/vay4buoc.gif');"></div>-->
           </div>
         </div>
@@ -7378,8 +7378,8 @@
             <div class="ladi-image-background"></div>
           </div>
         </div>
-        <div class="slider-arrow left"></div>
-        <div class="slider-arrow right"></div>
+<!--        <div class="slider-arrow left"></div>-->
+<!--        <div class="slider-arrow right"></div>-->
       </div>
     </div>
     <div id="SECTION12" class='ladi-section'>
@@ -7391,17 +7391,17 @@
             <div class="slide slide-gif" aria-label="GIF demo"
                  style="background-image:url('./ladi/slide-bn-2-mb.gif');"></div>
             <!-- Slide 2: Giữ nguyên -->
-            <div class="slide slide-static"></div>
-            <!-- Slide 3: Đổi từ GIF sang Video -->
-            <div class="slide slide-gif" aria-label="GIF demo"
-                 style="background-image:url('./ladi/slide-bn-2-mb.gif');"></div>
+<!--            <div class="slide slide-static"></div>-->
+<!--            &lt;!&ndash; Slide 3: Đổi từ GIF sang Video &ndash;&gt;-->
+<!--            <div class="slide slide-gif" aria-label="GIF demo"-->
+<!--                 style="background-image:url('./ladi/slide-bn-2-mb.gif');"></div>-->
             <!--              <div class="slide slide-gif" style="background-image: url('./ladi/vay4buoc.gif');"></div>-->
           </div>
         </div>
       </div>
       <div class="ladi-container">
-        <div class="slider-arrow left"></div>
-        <div class="slider-arrow right"></div>
+<!--        <div class="slider-arrow left"></div>-->
+<!--        <div class="slider-arrow right"></div>-->
       </div>
     </div>
     <div id="SECTION13" class='ladi-section'>
@@ -10063,13 +10063,13 @@
 
     .slider {
       display: flex;
-      width: 200%;
+      /*width: 200%;*/
       height: 100%;
       /*animation: slide-with-pauses 30s infinite;*/
     }
 
     .slide {
-      width: 33.333%;
+      width: 100%;
       height: 100%;
       background-size: cover;
       background-position: center;
@@ -10120,25 +10120,25 @@
     }
 
 
-    @keyframes slide-with-pauses {
-      /*0% {*/
-      /*  transform: translateX(0%);*/
-      /*}*/
-      /*45% {*/
-      /*  transform: translateX(0%);*/
-      /*}*/
+    /*@keyframes slide-with-pauses {*/
+    /*  0% {*/
+    /*    transform: translateX(0%);*/
+    /*  }*/
+    /*  45% {*/
+    /*    transform: translateX(0%);*/
+    /*  }*/
 
-      /*50% {*/
-      /*  transform: translateX(-33.333%);*/
-      /*}*/
-      /*95% {*/
-      /*  transform: translateX(-33.333%);*/
-      /*}*/
+    /*  50% {*/
+    /*    transform: translateX(-33.333%);*/
+    /*  }*/
+    /*  95% {*/
+    /*    transform: translateX(-33.333%);*/
+    /*  }*/
 
-      /*100% {*/
-      /*  transform: translateX(-66.666%);*/
-      /*}*/
-    }
+    /*  100% {*/
+    /*    transform: translateX(-66.666%);*/
+    /*  }*/
+    /*}*/
 
     /*#SECTION2 .slider {*/
     /*  display: flex;*/
@@ -10630,33 +10630,34 @@
     @media (max-width: 767px) {
       .slider {
         display: flex;
-        width: 300%;
+        /* width: 300%; */
+        width: 100%;
         height: 100%;
-        animation: slide-with-pauses 7s infinite;
+        /* animation: slide-with-pauses 7s infinite; */
       }
 
-      @keyframes slide-with-pauses {
-        0% {
-          transform: translateX(0%);
-        }
-        45% {
-          transform: translateX(0%);
-        }
+      /*@keyframes slide-with-pauses {*/
+      /*  0% {*/
+      /*    transform: translateX(0%);*/
+      /*  }*/
+      /*  45% {*/
+      /*    transform: translateX(0%);*/
+      /*  }*/
 
-        50% {
-          transform: translateX(-33.333%);
-        }
-        95% {
-          transform: translateX(-33.333%);
-        }
+      /*  50% {*/
+      /*    transform: translateX(-33.333%);*/
+      /*  }*/
+      /*  95% {*/
+      /*    transform: translateX(-33.333%);*/
+      /*  }*/
 
-        100% {
-          transform: translateX(-66.666%);
-        }
-      }
+      /*  100% {*/
+      /*    transform: translateX(-66.666%);*/
+      /*  }*/
+      /*}*/
 
       .slide-gif {
-        background-image: url('./ladi/vay4buocmb.gif');
+        background-image: url('./ladi/slide-bn-2.gif');
       }
 
       .slide-static {
@@ -10866,79 +10867,79 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
 
-      const section2 = document.getElementById('SECTION2');
-      if (!section2) return;
-
-      const slider = section2.querySelector('.slider');
-      let slides = Array.from(section2.querySelectorAll('.slide'));
-
-      if (!slider || slides.length === 0) {
-        console.error('Slider components not found');
-        return;
-      }
-
-      // Logic tạo slider vô hạn (cloning)
-      const firstClone = slides[0].cloneNode(true);
-      const lastClone = slides[slides.length - 1].cloneNode(true);
-      firstClone.id = 'first-clone';
-      lastClone.id = 'last-clone';
-      slider.appendChild(firstClone);
-      slider.insertBefore(lastClone, slides[0]);
-
-      const allSlides = Array.from(slider.querySelectorAll('.slide'));
-      const slideCount = allSlides.length;
-
-      slider.style.width = `${100 * slideCount}%`;
-      allSlides.forEach(slide => {
-        slide.style.width = `${100 / slideCount}%`;
-      });
-
-      let currentIndex = 1;
-      let isTransitioning = false;
-      let autoSlideInterval = null;
-
-      function moveToNext() {
-        if (isTransitioning) return;
-        currentIndex++;
-        slider.style.transition = 'transform 0.7s ease-in-out';
-        const offset = -100 / slideCount * currentIndex;
-        slider.style.transform = `translateX(${offset}%)`;
-        isTransitioning = true;
-      }
-
-      slider.addEventListener('transitionend', () => {
-        isTransitioning = false;
-        if (allSlides[currentIndex].id === 'first-clone') {
-          slider.style.transition = 'none';
-          currentIndex = 1;
-          const offset = -100 / slideCount * currentIndex;
-          slider.style.transform = `translateX(${offset}%)`;
-        }
-      });
-
-      function startAutoSlide() {
-        if (autoSlideInterval) clearInterval(autoSlideInterval);
-        if (window.innerWidth >= 768) {
-          autoSlideInterval = setInterval(moveToNext, 5000);
-        }
-      }
-
-      // // Tạm dừng khi di chuột vào banner
-      // section2.addEventListener('mouseenter', () => {
-      //   if (autoSlideInterval) clearInterval(autoSlideInterval);
+      // const section2 = document.getElementById('SECTION2');
+      // if (!section2) return;
+      //
+      // const slider = section2.querySelector('.slider');
+      // let slides = Array.from(section2.querySelectorAll('.slide'));
+      //
+      // if (!slider || slides.length === 0) {
+      //   console.error('Slider components not found');
+      //   return;
+      // }
+      //
+      // // Logic tạo slider vô hạn (cloning)
+      // const firstClone = slides[0].cloneNode(true);
+      // const lastClone = slides[slides.length - 1].cloneNode(true);
+      // firstClone.id = 'first-clone';
+      // lastClone.id = 'last-clone';
+      // slider.appendChild(firstClone);
+      // slider.insertBefore(lastClone, slides[0]);
+      //
+      // const allSlides = Array.from(slider.querySelectorAll('.slide'));
+      // const slideCount = allSlides.length;
+      //
+      // slider.style.width = `${100 * slideCount}%`;
+      // allSlides.forEach(slide => {
+      //   slide.style.width = `${100 / slideCount}%`;
       // });
       //
-      // // Chạy lại khi di chuột ra
-      // section2.addEventListener('mouseleave', () => {
-      //   startAutoSlide();
+      // let currentIndex = 1;
+      // let isTransitioning = false;
+      // let autoSlideInterval = null;
+      //
+      // function moveToNext() {
+      //   if (isTransitioning) return;
+      //   currentIndex++;
+      //   slider.style.transition = 'transform 0.7s ease-in-out';
+      //   const offset = -100 / slideCount * currentIndex;
+      //   slider.style.transform = `translateX(${offset}%)`;
+      //   isTransitioning = true;
+      // }
+      //
+      // slider.addEventListener('transitionend', () => {
+      //   isTransitioning = false;
+      //   if (allSlides[currentIndex].id === 'first-clone') {
+      //     slider.style.transition = 'none';
+      //     currentIndex = 1;
+      //     const offset = -100 / slideCount * currentIndex;
+      //     slider.style.transform = `translateX(${offset}%)`;
+      //   }
       // });
-
-      // Khởi tạo slider
-      slider.style.transition = 'none';
-      const initialOffset = -100 / slideCount * currentIndex;
-      slider.style.transform = `translateX(${initialOffset}%)`;
-      startAutoSlide(); // Bắt đầu tự chạy
-      window.addEventListener('resize', startAutoSlide);
+      //
+      // function startAutoSlide() {
+      //   if (autoSlideInterval) clearInterval(autoSlideInterval);
+      //   if (window.innerWidth >= 768) {
+      //     autoSlideInterval = setInterval(moveToNext, 5000);
+      //   }
+      // }
+      //
+      // // // Tạm dừng khi di chuột vào banner
+      // // section2.addEventListener('mouseenter', () => {
+      // //   if (autoSlideInterval) clearInterval(autoSlideInterval);
+      // // });
+      // //
+      // // // Chạy lại khi di chuột ra
+      // // section2.addEventListener('mouseleave', () => {
+      // //   startAutoSlide();
+      // // });
+      //
+      // // Khởi tạo slider
+      // slider.style.transition = 'none';
+      // const initialOffset = -100 / slideCount * currentIndex;
+      // slider.style.transform = `translateX(${initialOffset}%)`;
+      // startAutoSlide(); // Bắt đầu tự chạy
+      // window.addEventListener('resize', startAutoSlide);
 
       const flipCardsOnMobile = () => {
         if (window.innerWidth > 767) {
@@ -12026,11 +12027,9 @@
       }
     });
     function forceCloseAllModalsAndBackdrops() {
-      // Lấy instance của các modal Bootstrap
       const luckyWheelModalInstance = bootstrap.Modal.getInstance(document.getElementById('modalLuckyWheel'));
       const myModalInstance = bootstrap.Modal.getInstance(document.getElementById('myModal'));
 
-      // Ẩn các modal Bootstrap nếu chúng đang mở
       if (luckyWheelModalInstance) {
         luckyWheelModalInstance.hide();
       }
@@ -12038,23 +12037,17 @@
         myModalInstance.hide();
       }
 
-      // Ẩn popup kết quả tùy chỉnh
       const resultPopup = document.getElementById('result-popup');
       if (resultPopup) {
         resultPopup.classList.remove('visible');
       }
-
-      // Đợi một chút để Bootstrap hoàn tất animation, sau đó dọn dẹp triệt để
       setTimeout(() => {
-        // Xóa tất cả các backdrop còn sót lại
         const backdrops = document.querySelectorAll('.modal-backdrop');
         backdrops.forEach(backdrop => backdrop.remove());
-
-        // Khôi phục trạng thái của thẻ body
         document.body.classList.remove('modal-open');
         document.body.style.paddingRight = '';
         document.body.style.overflow = '';
-      }, 300); // 300ms là đủ để animation của Bootstrap kết thúc
+      }, 300);
 
       // Ẩn icon vòng quay sau khi người dùng đã chơi xong
       const luckyWheelIcon = document.getElementById('lucky-wheel-fixed');
