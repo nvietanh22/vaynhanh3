@@ -1320,6 +1320,16 @@
     }
 
     @media (min-width: 768px) {
+      .navbar-mobile-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background: #f8f9fa;
+        height: 67px;
+        border-radius: 0;
+      }
       .ladi-carousel-fullwidth {
         width: 100vw !important;
         left: calc(-50vw + 50%) !important;
@@ -1329,6 +1339,17 @@
     }
 
     @media (max-width: 767px) {
+      .navbar-mobile-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background: #f8f9fa;
+        border-bottom: 1px solid #ddd;
+        height: 76px;
+      }
+
       .small-text {
         font-size: 16px;
       }
@@ -7040,7 +7061,7 @@
   <div class="ladi-wraper">
     <div id="SECTION1" class='ladi-section'>
       <div class='ladi-section-background'></div>
-      <div class="ladi-container">
+      <div class="ladi-container navbar-mobile-fixed">
         <div data-action="true" id="HEADLINE3" class='ladi-element'>
           <h1 class='ladi-headline ladi-transition'>Lợi ích</h1>
         </div>
@@ -7183,7 +7204,7 @@
                               <div class='ladi-button'>
                                 <div class="ladi-button-background"></div>
                                 <div id="BUTTON_TEXT25" class='ladi-element ladi-button-headline'>
-                                  <p class='ladi-headline'>ĐĂNG KÝ NGAY</p>
+                                  <p class='ladi-headline'>Gửi thông tin</p>
                                 </div>
                               </div>
                             </div>
@@ -7501,7 +7522,7 @@
                                   <div class='ladi-button'>
                                     <div class="ladi-button-background"></div>
                                     <div id="BUTTON_TEXT27" class='ladi-element ladi-button-headline'>
-                                      <p class='ladi-headline' id="btn-submit">ĐĂNG KÝ NGAY</p>
+                                      <p class='ladi-headline' id="btn-submit">Gửi thông tin</p>
                                     </div>
                                   </div>
                                 </div>
@@ -9343,7 +9364,7 @@
                   </form>
                   <div class="text-center">
                     <button class="btn button-gardient mb-4 form-control" id="btn-submit-popup">
-                      Đăng ký ngay
+                      Gửi thông tin
                     </button>
                   </div>
                 </div>
@@ -9481,12 +9502,6 @@
       </div>
     </div>
   </div>
-  </div>
-  <div id="fixed-register-button">
-    <img src="./ladi/fixed-regis-button-desktop.png" alt="Đăng ký vay ngay">
-  </div>
-  <div id="fixed-mobile-cta-wrapper">
-    <button id="fixed-mobile-cta">Đăng ký ngay</button>
   </div>
   <div id="customer-counter-wrapper">
     <div id="customer-counter-inner">
@@ -10791,7 +10806,7 @@
         border-radius: 100px;
         background: linear-gradient(to right, #CC002E, #EC1848, #9A268F);
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        bottom: 10770px;
+        bottom: 10690px;
         left: 50%;
         transform: translateX(-50%);
         width: 250px;
@@ -10976,10 +10991,15 @@
       if (counterWidget && counterContainer) {
         const startDate = new Date('2025-08-06T00:00:00+07:00');
         const startValue = 396750;
-        const incrementPerDay = 30810;
+        const incrementPerDay = 15000;
+        const minValue = 800000;     // <-- THÊM: mốc quay về
         const maxValue = 1000000;
         const MS_PER_DAY = 86400000;
-
+        const wrapToRange = (val) => {
+          const range = maxValue - minValue; // 200.000
+          // xử lý cả trường hợp val < minValue
+          return ((val - minValue) % range + range) % range + minValue;
+        };
         const calculatePreciseCurrentValue = () => {
           const now = new Date();
           const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -10988,8 +11008,12 @@
           const msPassedToday = now.getTime() - todayStart.getTime();
           const fractionOfDayPassed = msPassedToday / MS_PER_DAY;
           const incrementToday = fractionOfDayPassed * incrementPerDay;
-          let finalValue = baseValueForToday + incrementToday;
-          return Math.min(finalValue, maxValue);
+
+          const rawValue = baseValueForToday + incrementToday;
+
+          // Nếu chưa tới 800k thì vẫn đếm lên bình thường cho tới khi chạm 1tr mới vòng về 800k
+          // -> dùng wrap để bảo đảm khi vượt 1tr sẽ quay về 800k và tiếp tục tăng
+          return rawValue >= maxValue ? wrapToRange(rawValue) : rawValue;
         };
 
         const createCounterStructure = (valueString) => {
@@ -10999,9 +11023,7 @@
               const digitRoller = document.createElement('div');
               digitRoller.className = 'digit-roller';
               let innerHTML = '';
-              for (let i = 0; i <= 9; i++) {
-                innerHTML += `<span>${i}</span>`;
-              }
+              for (let i = 0; i <= 9; i++) innerHTML += `<span>${i}</span>`;
               digitRoller.innerHTML = innerHTML;
               counterContainer.appendChild(digitRoller);
             } else {
